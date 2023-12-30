@@ -1,16 +1,25 @@
 import Column from "../Column/Column";
 
-function MainContent() {
+const statusList = [
+  "Без статуса",
+  "Нужно сделать",
+  "В работе",
+  "Тестирование",
+  "Готово",
+];
+
+function MainContent({cardList, isLoaded}) {
   return (
     <main className="main">
       <div className="container">
         <div className="main__block">
           <div className="main__content">
-            <Column title={"без статуса"} />
-            <Column title={"нужно сделать"} />
-            <Column title={"в работе"} />
-            <Column title={"тестирование"} />
-            <Column title={"готово"} />
+            {isLoaded ? "Loading" : statusList.map((item) => (
+              <Column 
+              key={item}
+              title={item} 
+              cardList={cardList.filter((card) => card.status === item)}/>)
+          )}
           </div>
         </div>
       </div>
