@@ -1,25 +1,55 @@
-function Card({ classNameTheme, theme, name, deadline }) {
+import {
+  CardItem,
+  CardWrapper,
+  CardGroup,
+  CardThemeText,
+  CardTheme,
+  CardBtn,
+  CardBtnInnerPoint,
+  CardContent,
+  CardTitle,
+  DeadlineBlock,
+  DeadlineIcon,
+  DeadlineDate,
+} from "./Card.styled.js";
+
+function Card({ theme, name, deadline }) {
+  let color;
+  switch (theme) {
+    case "Web Design":
+      color = "_orange";
+      break;
+    case "Copywriting":
+      color = "_purple";
+      break;
+    case "Research":
+      color = "_green";
+      break;
+    default:
+      color = "_gray";
+      break;
+  }
   return (
-    <div className="cards__item">
-      <div className="cards__card card">
-        <div className="card__group">
-          <div className={"card__theme" + " " + classNameTheme}>
-            <p className={classNameTheme}>{theme}</p>
-          </div>
+    <CardItem>
+      <CardWrapper>
+        <CardGroup>
+          <CardTheme $themeColor={color}>
+            <CardThemeText>{theme}</CardThemeText>
+          </CardTheme>
           <a href="#popBrowse" target="_self">
-            <div className="card__btn">
-              <div />
-              <div />
-              <div />
-            </div>
+            <CardBtn>
+              <CardBtnInnerPoint />
+              <CardBtnInnerPoint />
+              <CardBtnInnerPoint />
+            </CardBtn>
           </a>
-        </div>
-        <div className="card__content">
+        </CardGroup>
+        <CardContent>
           <a href="" target="_blank">
-            <h3 className="card__title">{name}</h3>
+            <CardTitle>{name}</CardTitle>
           </a>
-          <div className="card__date">
-            <svg
+          <DeadlineBlock>
+            <DeadlineIcon
               xmlns="http://www.w3.org/2000/svg"
               width={13}
               height={13}
@@ -46,12 +76,12 @@ function Card({ classNameTheme, theme, name, deadline }) {
                   <rect width={13} height={13} fill="white" />
                 </clipPath>
               </defs>
-            </svg>
-            <p>{deadline}</p>
-          </div>
-        </div>
-      </div>
-    </div>
+            </DeadlineIcon>
+            <DeadlineDate>{deadline}</DeadlineDate>
+          </DeadlineBlock>
+        </CardContent>
+      </CardWrapper>
+    </CardItem>
   );
 }
 export default Card;

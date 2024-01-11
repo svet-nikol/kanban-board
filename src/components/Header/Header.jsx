@@ -1,4 +1,7 @@
 import { useState } from "react";
+import { Container } from "../Common/Common.styled.js";
+import { HeaderSt, HeaderBlock, HeaderLogoImg, HeaderNav } from "./Header.styled.js";
+
 
 function Header({addCard}) {
   const [isOpened, setIsOpened] = useState(false);
@@ -6,20 +9,20 @@ function Header({addCard}) {
     setIsOpened((prev) => !prev)
   }
   return (
-    <header className="header">
-      <div className="container">
-        <div className="header__block">
+    <HeaderSt>
+      <Container>
+        <HeaderBlock>
           <div className="header__logo _show _light">
             <a href="" target="_self">
-              <img src="public/images/logo.png" alt="logo" />
+              <HeaderLogoImg src="public/images/logo.png" alt="logo" />
             </a>
           </div>
           <div className="header__logo _dark">
             <a href="" target="_self">
-              <img src="public/images/logo_dark.png" alt="logo" />
+              <HeaderLogoImg src="public/images/logo_dark.png" alt="logo" />
             </a>
           </div>
-          <nav className="header__nav">
+          <HeaderNav>
             <button className="header__btn-main-new _hover01" id="btnMainNew" onClick={addCard}>
             Создать новую задачу
             </button>
@@ -30,7 +33,6 @@ function Header({addCard}) {
                         <div
                         className="header__pop-user-set pop-user-set"
                       >
-                        {/* <a href="">x</a> */}
                         <p className="pop-user-set__name">Ivan Ivanov</p>
                         <p className="pop-user-set__mail">ivan.ivanov@gmail.com</p>
                         <div className="pop-user-set__theme">
@@ -42,10 +44,10 @@ function Header({addCard}) {
                         </button>
                       </div>
             }
-          </nav>
-        </div>
-      </div>
-    </header>
+          </HeaderNav>
+        </HeaderBlock>
+      </Container>
+    </HeaderSt>
   );
 }
 

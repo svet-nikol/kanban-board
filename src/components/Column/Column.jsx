@@ -1,22 +1,24 @@
 import Card from "../Card/Card";
+import { ColumnItem, Title, TitleText, Cards } from "./Column.styled.js";
 
 function Column({ title, cardList }) {
   return (
-    <div className="main__column">
-      <div className="column__title">
-        <p>{title}</p>
-      </div>
-      <div className="cards">
-        {cardList.map((card) => 
-                <Card
-                classNameTheme={card.classNameTheme}
-                theme={card.theme}
-                name={card.title}
-                deadline={card.date}
-                key={card.id}
-              />)}
-      </div>
-    </div>
+    <ColumnItem>
+      <Title>
+        <TitleText>{title}</TitleText>
+      </Title>
+      <Cards>
+        {cardList.map((card) => (
+          <Card
+            classNameTheme={card.classNameTheme}
+            theme={card.theme}
+            name={card.title}
+            deadline={card.date}
+            key={card.id}
+          />
+        ))}
+      </Cards>
+    </ColumnItem>
   );
 }
 
