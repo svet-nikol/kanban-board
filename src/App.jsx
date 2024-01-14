@@ -36,15 +36,15 @@ function App() {
 
   return (
     <>
-    <GlobalStyle />
-    <Wrapper>
-      <PopExit />
-      <PopNewCard />
-      <PopBrowse />
+      <GlobalStyle />
+      <Wrapper>
+        <PopExit />
+        <PopNewCard />
+        <PopBrowse />
 
-      <Header addCard={addCard} />
-      <MainContent isLoaded={isLoaded} cardList={cards} />
-    </Wrapper>
+        <Header addCard={addCard} />
+        <MainContent isLoaded={isLoaded} cardList={cards} />
+      </Wrapper>
     </>
   );
 }

@@ -59,7 +59,7 @@ body {
   padding: 0 30px;
 } */
 
-._hover01:hover {
+/* ._hover01:hover {
   background-color: #33399b;
 }
 
@@ -79,7 +79,7 @@ body {
 }
 ._hover03:hover a {
   color: #ffffff;
-}
+} */
 
 .pop-user-set:target,
 .pop-exit:target,
@@ -748,7 +748,7 @@ body {
   align-items: center;
   justify-content: center;
 } */
-.header__btn-main-new {
+/* .header__btn-main-new {
   width: 178px;
   height: 30px;
   border-radius: 4px;
@@ -759,11 +759,11 @@ body {
   line-height: 1;
   font-weight: 500;
   margin-right: 20px;
-}
-.header__btn-main-new a {
+} */
+/* .header__btn-main-new a {
   color: #ffffff;
-}
-.header__user {
+} */
+/* .header__user {
   height: 20px;
   display: flex;
   flex-wrap: nowrap;
@@ -784,7 +784,7 @@ body {
   transform: rotate(-45deg);
   margin: -6px 0 0 5px;
   padding: 0;
-}
+} */
 .header__pop-user-set {
   display: block;
   position: absolute;
@@ -1013,7 +1013,7 @@ body {
     width: 100%;
     padding: 0 16px;
   } */
-  .header__btn-main-new {
+  /* .header__btn-main-new {
     z-index: 3;
     position: fixed;
     left: 16px;
@@ -1023,7 +1023,7 @@ body {
     height: 40px;
     border-radius: 4px;
     margin-right: 0;
-  }
+  } */
   .pop-new-card__container {
     padding: 0;
     justify-content: flex-start;

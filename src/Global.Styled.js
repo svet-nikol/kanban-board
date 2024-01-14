@@ -35,4 +35,26 @@ body {
   font-family: "Roboto", Arial, Helvetica, sans-serif;
   color: #000000;
 }
-`
+
+._hover01:hover {
+  background-color: #33399b;
+}
+
+._hover02:hover,
+.header__user:hover {
+  color: #33399b;
+}
+._hover02:hover::after,
+.header__user:hover::after {
+  border-left-color: #33399b;
+  border-bottom-color: #33399b;
+}
+
+._hover03:hover {
+  background-color: #33399b;
+  color: #ffffff;
+}
+._hover03:hover a {
+  color: #ffffff;
+}
+`;
