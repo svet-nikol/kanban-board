@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import {
   CardItem,
   CardWrapper,
@@ -12,8 +13,10 @@ import {
   DeadlineIcon,
   DeadlineDate,
 } from "./Card.styled.js";
+import { AppRoutes } from "../../lib/approutes.js";
 
-function Card({ theme, name, deadline }) {
+function Card({ theme, name, deadline, id }) {
+
   let color;
   switch (theme) {
     case "Web Design":
@@ -45,9 +48,9 @@ function Card({ theme, name, deadline }) {
           </a>
         </CardGroup>
         <CardContent>
-          <a href="" target="_blank">
+          <Link to={`${AppRoutes.CARD}/${id}`}>
             <CardTitle>{name}</CardTitle>
-          </a>
+          </Link>
           <DeadlineBlock>
             <DeadlineIcon
               xmlns="http://www.w3.org/2000/svg"
