@@ -1,9 +1,9 @@
 import "./signup.css";
 import { Link } from "react-router-dom";
 import { AppRoutes } from "../../lib/approutes.js";
-import { setUser } from "../../App.jsx";
 
-export default function RegisterPage() {
+export default function RegisterPage({toggleIsLoggedIn}) {
+
   return (
     <div className="wrapper">
       <div className="container-signup">
@@ -37,7 +37,7 @@ export default function RegisterPage() {
               <Link
                 className="modal__btn-signup-ent _hover01"
                 id="SignUpEnter"
-                onClick={setUser}
+                onClick={toggleIsLoggedIn}
                 to={AppRoutes.HOME}
               >Зарегистрироваться
               </Link>

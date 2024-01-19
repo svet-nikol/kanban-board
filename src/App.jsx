@@ -9,19 +9,18 @@ import PrivateRoute from "./components/PrivateRoute/PrivateRoute.jsx";
 import CardPage from "./pages/CardPage.jsx";
 import ExitPage from "./pages/ExitPage.jsx";
 import NewCardPage from "./pages/NewCardPage.jsx";
+import { useState } from "react";
 
-export let user = true;
-console.log(`значение user ${user}`);
-
-export const setUser = () => {
- user=!user;
- console.log(`значение user ${user}`);
-};
 
 function App() {
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  function toggleIsLoggedIn() {
+    setIsLoggedIn((prev) => !prev);
+  }
+
   return (
     <Routes>
-      <Route element={<PrivateRoute user={user} />}>
+      <Route element={<PrivateRoute isLoggedIn={isLoggedIn} />}>
         <Route path={AppRoutes.HOME} element={<HomePageBoard />}>
           <Route path={`${AppRoutes.CARD}/:cardId`} element={<CardPage />} />
           <Route path={AppRoutes.NEW_CARD} element={<NewCardPage />} />
@@ -29,7 +28,7 @@ function App() {
         <Route path={AppRoutes.EXIT} element={<ExitPage />} />
       </Route>
       <Route path={AppRoutes.LOGIN} element={<LoginPage />} />
-      <Route path={AppRoutes.REGISTER} element={<RegisterPage />} />
+      <Route path={AppRoutes.REGISTER} element={<RegisterPage toggleIsLoggedIn={toggleIsLoggedIn} />} />
       <Route path={AppRoutes.NOT_FOUND} element={<NotFoundPage />} />
     </Routes>
   );
