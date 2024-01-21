@@ -1,4 +1,7 @@
-function PopExit() {
+import { Link } from "react-router-dom";
+import { AppRoutes } from "../../../lib/approutes";
+
+function PopExit({ toggleIsLoggedIn }) {
   return (
     <div className="pop-exit" id="popExit">
       <div className="pop-exit__container">
@@ -8,12 +11,21 @@ function PopExit() {
           </div>
           <form className="pop-exit__form" id="formExit" action="#">
             <div className="pop-exit__form-group">
-              <button className="pop-exit__exit-yes _hover01" id="exitYes">
-                <a href="modal/signin.html">Да, выйти</a>{" "}
-              </button>
-              <button className="pop-exit__exit-no _hover03" id="exitNo">
-                <a href="main.html">Нет, остаться</a>{" "}
-              </button>
+              <Link
+                className="pop-exit__exit-yes _hover01"
+                id="exitYes"
+                to={AppRoutes.LOGIN}
+                onClick={toggleIsLoggedIn}
+              >
+                Да, выйти
+              </Link>
+              <Link
+                className="pop-exit__exit-no _hover03"
+                id="exitNo"
+                to={AppRoutes.HOME}
+              >
+                Нет, остаться
+              </Link>
             </div>
           </form>
         </div>

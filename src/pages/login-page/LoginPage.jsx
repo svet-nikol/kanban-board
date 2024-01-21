@@ -2,7 +2,7 @@ import "./signin.css";
 import { Link } from "react-router-dom";
 import { AppRoutes } from "../../lib/approutes.js";
 
-export default function LoginPage() {
+export default function LoginPage({ toggleIsLoggedIn }) {
   return (
     <div className="wrapper">
       <div className="container-signin">
@@ -26,9 +26,12 @@ export default function LoginPage() {
                 id="formpassword"
                 placeholder="Пароль"
               />
-              <button className="modal__btn-enter _hover01" id="btnEnter">
-                <a href="../main.html">Войти</a>
-              </button>
+              <Link
+                className="modal__btn-enter _hover01"
+                id="btnEnter"
+                onClick={toggleIsLoggedIn}
+                to={AppRoutes.HOME}
+              >Войти</Link>
               <div className="modal__form-group">
                 <p>Нужно зарегистрироваться?</p>
                 <Link to={AppRoutes.REGISTER}>Регистрируйтесь здесь</Link>

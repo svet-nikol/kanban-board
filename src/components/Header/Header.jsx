@@ -9,8 +9,10 @@ import {
   HeaderUser,
 } from "./Header.styled.js";
 import { GlobalStyle } from "../../Global.Styled.js";
+import { AppRoutes } from "../../lib/approutes.js";
+import { Link } from "react-router-dom";
 
-function Header({ addCard }) {
+function Header() {
   const [isOpened, setIsOpened] = useState(false);
   function togglePopUp() {
     setIsOpened((prev) => !prev);
@@ -31,13 +33,16 @@ function Header({ addCard }) {
             </a>
           </div>
           <HeaderNav>
-            <HeaderBtnNewTask
-              className="_hover01"
-              id="btnMainNew"
-              onClick={addCard}
-            >
-              Создать новую задачу
-            </HeaderBtnNewTask>
+            <Link to={AppRoutes.NEW_CARD}>
+              <HeaderBtnNewTask
+                className="_hover01"
+                id="btnMainNew"
+                // onClick={addCard}
+              >
+                Создать новую задачу
+              </HeaderBtnNewTask>
+            </Link>
+
             <HeaderUser href="#" className="_hover02" onClick={togglePopUp}>
               Ivan Ivanov
             </HeaderUser>
@@ -49,9 +54,13 @@ function Header({ addCard }) {
                   <p>Темная тема</p>
                   <input type="checkbox" className="checkbox" name="checkbox" />
                 </div>
-                <button type="button" className="_hover03">
-                  <a href="#popExit">Выйти</a>
-                </button>
+                <Link
+                  className="pop-exit__exit-no _hover03"
+                  to={AppRoutes.EXIT}
+                  onClick={togglePopUp}
+                >
+                  Выйти
+                </Link>
               </div>
             )}
           </HeaderNav>

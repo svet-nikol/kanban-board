@@ -5,12 +5,10 @@ import Wrapper from "../components/Wrapper/Wrapper.jsx";
 import Header from "../components/Header/Header.jsx";
 import MainContent from "../components/MainContent/MainContent.jsx";
 import "../App.css";
-import { Link, Outlet } from "react-router-dom";
-import { AppRoutes } from "../lib/approutes.js";
+import { Outlet } from "react-router-dom";
 
 
 export default function HomePageBoard() {
-    const [cards, setCards] = useState(cardList);
 
     const [isLoaded, setIsLoaded] = useState(true);
   
@@ -20,19 +18,7 @@ export default function HomePageBoard() {
       }, 300);
     }, []);
   
-    function addCard() {
-      setCards([
-        ...cards,
-        {
-          id: cards.length + 1,
-          theme: "Copywriting",
-          title: "Новая задача",
-          date: "30.10.23",
-          status: "Без статуса",
-          classNameTheme: "_purple",
-        },
-      ]);
-    }
+
   
     return (
       <>
@@ -41,16 +27,9 @@ export default function HomePageBoard() {
 
           <Outlet />
   
-          <Header addCard={addCard} />
-          <MainContent isLoaded={isLoaded} cardList={cards} />
-          
-          <Link to={AppRoutes.LOGIN}>Войти</Link>
-          <br />
-          <Link to={AppRoutes.REGISTER}>Зарегистрироваться</Link>
-          <br />
-          <Link to={AppRoutes.EXIT}>Выйти</Link>
-          <br />
-          <Link to={AppRoutes.NEW_CARD}>Создать задачу</Link>
+          <Header />
+          <MainContent isLoaded={isLoaded} cardList={cardList} />
+
         </Wrapper>
       </>
     );

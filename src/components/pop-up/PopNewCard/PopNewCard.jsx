@@ -1,4 +1,7 @@
-function PopNewCard() {
+import { Link } from "react-router-dom";
+import { AppRoutes } from "../../../lib/approutes";
+
+function PopNewCard({addCard}) {
   return (
     <div className="pop-new-card" id="popNewCard">
       <div className="pop-new-card__container">
@@ -158,9 +161,11 @@ function PopNewCard() {
                 </div>
               </div>
             </div>
-            <button className="form-new__create _hover01" id="btnCreate">
-              Создать задачу
-            </button>
+            <Link onClick={addCard} to={AppRoutes.HOME}>
+              <button className="form-new__create _hover01" id="btnCreate">
+                Создать задачу
+              </button>
+            </Link>
           </div>
         </div>
       </div>
