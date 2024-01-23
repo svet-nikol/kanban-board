@@ -17,9 +17,12 @@ export default function HomePageBoard() {
         setIsLoaded(false);
       }, 300);
     }, []);
-  
 
-  
+    const [cards, setCards] = useState(cardList);
+    useEffect(() => {
+      setCards(cardList);
+    }, [cards]);
+
     return (
       <>
         <GlobalStyle />
@@ -28,7 +31,7 @@ export default function HomePageBoard() {
           <Outlet />
   
           <Header />
-          <MainContent isLoaded={isLoaded} cardList={cardList} />
+          <MainContent isLoaded={isLoaded} cardList={cards} />
 
         </Wrapper>
       </>
