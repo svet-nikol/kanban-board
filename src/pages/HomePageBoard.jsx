@@ -15,7 +15,6 @@ export default function HomePageBoard({isLoggedIn}) {
     getTasks({token: isLoggedIn.token})
       .then((cards) => {
         setCards(cards.tasks);
-        console.log(cards.tasks);
       })
       .catch((error) => {
         setGetCardsError(error.message);
@@ -31,7 +30,7 @@ export default function HomePageBoard({isLoggedIn}) {
       <Wrapper>
         <Outlet />
 
-        <Header />
+        <Header user={isLoggedIn}/>
         {getCardsError ? (
           <p style={{ color: "red" }}>{getCardsError}</p>
         ) : (
