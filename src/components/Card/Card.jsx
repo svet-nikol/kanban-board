@@ -16,7 +16,6 @@ import {
 import { AppRoutes } from "../../lib/approutes.js";
 
 function Card({ theme, name, deadline, id }) {
-
   let color;
   switch (theme) {
     case "Web Design":
