@@ -41,8 +41,8 @@ function App() {
           <Route path={AppRoutes.EXIT} element={<ExitPage toggleIsLoggedIn={toggleIsLoggedIn} />} />
         </Route>
       </Route>
-      <Route path={AppRoutes.LOGIN} element={<LoginPage setIsLoggedIn={setIsLoggedIn}/>} />
-      <Route path={AppRoutes.REGISTER} element={<RegisterPage toggleIsLoggedIn={toggleIsLoggedIn} />} />
+      <Route path={AppRoutes.LOGIN} element={<LoginPage setIsLoggedIn={setIsLoggedIn} />} />
+      <Route path={AppRoutes.REGISTER} element={<RegisterPage setIsLoggedIn={setIsLoggedIn} />} />
       <Route path={AppRoutes.NOT_FOUND} element={<NotFoundPage />} />
     </Routes>
   );

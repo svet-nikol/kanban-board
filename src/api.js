@@ -32,3 +32,21 @@ export async function loginUser({ login, password }) {
   const user = await response.json();
   return user;
 }
+
+export async function registerUser({ login, name, password }) {
+  const response = await fetch(API_URL_USER, {
+    method: "POST",
+    body: JSON.stringify({
+      login,
+      name,
+      password,
+    }),
+  });
+
+  if (response.status === 400) {
+    throw new Error("Пользователь с таким логином уже сущеcтвует");
+  } 
+
+  const user = await response.json();
+  return user;
+}
