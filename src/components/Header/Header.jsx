@@ -12,7 +12,7 @@ import { GlobalStyle } from "../../Global.Styled.js";
 import { AppRoutes } from "../../lib/approutes.js";
 import { Link } from "react-router-dom";
 
-function Header() {
+function Header({user}) {
   const [isOpened, setIsOpened] = useState(false);
   function togglePopUp() {
     setIsOpened((prev) => !prev);
@@ -44,12 +44,12 @@ function Header() {
             </Link>
 
             <HeaderUser href="#" className="_hover02" onClick={togglePopUp}>
-              Ivan Ivanov
+              {user.name}
             </HeaderUser>
             {isOpened && (
               <div className="header__pop-user-set pop-user-set">
-                <p className="pop-user-set__name">Ivan Ivanov</p>
-                <p className="pop-user-set__mail">ivan.ivanov@gmail.com</p>
+                <p className="pop-user-set__name">{user.name}</p>
+                <p className="pop-user-set__mail">{user.login}</p>
                 <div className="pop-user-set__theme">
                   <p>Темная тема</p>
                   <input type="checkbox" className="checkbox" name="checkbox" />

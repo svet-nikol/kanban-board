@@ -15,7 +15,7 @@ import { cardList } from "./data.js";
 
 
 function App() {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(null);
   function toggleIsLoggedIn() {
     setIsLoggedIn((prev) => !prev);
   }
@@ -35,14 +35,14 @@ function App() {
   return (
     <Routes>
       <Route element={<PrivateRoute isLoggedIn={isLoggedIn} />}>
-        <Route path={AppRoutes.HOME} element={<HomePageBoard />}>
+        <Route path={AppRoutes.HOME} element={<HomePageBoard isLoggedIn={isLoggedIn}/>}>
           <Route path={`${AppRoutes.CARD}/:cardId`} element={<CardPage />} />
           <Route path={AppRoutes.NEW_CARD} element={<NewCardPage addCard={addCard}/>} />
           <Route path={AppRoutes.EXIT} element={<ExitPage toggleIsLoggedIn={toggleIsLoggedIn} />} />
         </Route>
       </Route>
-      <Route path={AppRoutes.LOGIN} element={<LoginPage toggleIsLoggedIn={toggleIsLoggedIn}/>} />
-      <Route path={AppRoutes.REGISTER} element={<RegisterPage toggleIsLoggedIn={toggleIsLoggedIn} />} />
+      <Route path={AppRoutes.LOGIN} element={<LoginPage setIsLoggedIn={setIsLoggedIn} />} />
+      <Route path={AppRoutes.REGISTER} element={<RegisterPage setIsLoggedIn={setIsLoggedIn} />} />
       <Route path={AppRoutes.NOT_FOUND} element={<NotFoundPage />} />
     </Routes>
   );
