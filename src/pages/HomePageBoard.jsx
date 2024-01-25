@@ -22,7 +22,7 @@ export default function HomePageBoard({isLoggedIn}) {
       .finally(() => {
         setGetCardsIsLoaded(false);
       });
-  }, []);
+  }, [isLoggedIn]);
 
   return (
     <>
