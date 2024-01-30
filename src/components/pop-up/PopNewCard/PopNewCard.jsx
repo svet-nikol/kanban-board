@@ -1,5 +1,6 @@
-import { Link } from "react-router-dom";
-import { AppRoutes } from "../../../lib/approutes";
+import Calendar from "../../Calendar/Calendar.jsx";
+import { ButtonAutoWidthBgFill } from "../../Buttons/Buttons.styled.js";
+
 
 function PopNewCard({addCard}) {
   return (
@@ -43,7 +44,7 @@ function PopNewCard({addCard}) {
                   />
                 </div>
               </form>
-              <div className="pop-new-card__calendar calendar">
+              {/* <div className="pop-new-card__calendar calendar">
                 <p className="calendar__ttl subttl">Даты</p>
                 <div className="calendar__block">
                   <div className="calendar__nav">
@@ -145,7 +146,8 @@ function PopNewCard({addCard}) {
                     </p>
                   </div>
                 </div>
-              </div>
+              </div> */}
+              <Calendar />
             </div>
             <div className="pop-new-card__categories categories">
               <p className="categories__p subttl">Категория</p>
@@ -161,11 +163,9 @@ function PopNewCard({addCard}) {
                 </div>
               </div>
             </div>
-            <Link onClick={addCard} to={AppRoutes.HOME}>
-              <button className="form-new__create _hover01" id="btnCreate">
+            <ButtonAutoWidthBgFill id="btnCreate" onClick={addCard} style={{float: "right"}}>
                 Создать задачу
-              </button>
-            </Link>
+            </ButtonAutoWidthBgFill>
           </div>
         </div>
       </div>

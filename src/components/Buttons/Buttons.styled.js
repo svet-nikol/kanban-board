@@ -1,6 +1,37 @@
 import styled from "styled-components";
 import { breakpoints } from "../../lib/breakpoints.js";
 
+export const ButtonAutoWidth = styled.button`
+  display: flex;
+  padding: 10px 14px;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border-radius: 4px;
+  border: 0.7px solid var(--palette-navy-60, #565eef);
+  outline: none;
+  background: transparent;
+  color: #565eef;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 10px;
+  &:hover {
+    background-color: #33399b;
+    border: 0.7px solid #33399b;
+    color: #ffffff;
+  }
+`;
+
+export const ButtonAutoWidthBgFill = styled(ButtonAutoWidth)`
+  background: var(--Palette-Navy-60, #565eef);
+  color: #ffffff;
+  &:hover {
+    background-color: #33399b;
+    border: 0.7px solid #33399b;
+  }
+`;
+
 // const sizes = {
 //   small: {
 //     fontSize: "0.8em",
