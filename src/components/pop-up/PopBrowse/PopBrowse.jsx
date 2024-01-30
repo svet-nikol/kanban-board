@@ -1,15 +1,31 @@
 import { Link, useParams } from "react-router-dom";
 import { AppRoutes } from "../../../lib/approutes";
+import {
+  PopBrowseSt,
+  PopUpContainer,
+  PopUpBlock,
+  PopUpContent,
+  PopUpTtl,
+  PopUpWrap,
+  PopUpForm,
+  PopUpFormBlock,
+  PopUpFormTextarea,
+} from "../PopUp.styled";
+import Calendar from "../../Calendar/Calendar.jsx";
+import {
+  ButtonAutoWidth,
+  ButtonAutoWidthBgFill,
+} from "../../Buttons/Buttons.styled.js";
 
 function PopBrowse() {
   let { cardId } = useParams();
   return (
-    <div className="pop-browse" id="popBrowse">
-      <div className="pop-browse__container">
-        <div className="pop-browse__block">
-          <div className="pop-browse__content">
+    <PopBrowseSt id="popBrowse">
+      <PopUpContainer>
+        <PopUpBlock>
+          <PopUpContent>
             <div className="pop-browse__top-block">
-              <h3 className="pop-browse__ttl">Название задачи:{cardId}</h3>
+              <PopUpTtl>Название задачи:{cardId}</PopUpTtl>
               <div className="categories__theme theme-top _orange _active-category">
                 <p className="_orange">Web Design</p>
               </div>
@@ -34,27 +50,22 @@ function PopBrowse() {
                 </div>
               </div>
             </div>
-            <div className="pop-browse__wrap">
-              <form
-                className="pop-browse__form form-browse"
-                id="formBrowseCard"
-                action="#"
-              >
-                <div className="form-browse__block">
+            <PopUpWrap>
+              <PopUpForm id="formBrowseCard" action="#">
+                <PopUpFormBlock>
                   <label htmlFor="textArea01" className="subttl">
                     Описание задачи
                   </label>
-                  <textarea
-                    className="form-browse__area"
+                  <PopUpFormTextarea
                     name="text"
                     id="textArea01"
                     readOnly=""
                     placeholder="Введите описание задачи..."
                     defaultValue={""}
                   />
-                </div>
-              </form>
-              <div className="pop-new-card__calendar calendar">
+                </PopUpFormBlock>
+              </PopUpForm>
+              {/* <div className="pop-new-card__calendar calendar">
                 <p className="calendar__ttl subttl">Даты</p>
                 <div className="calendar__block">
                   <div className="calendar__nav">
@@ -158,8 +169,9 @@ function PopBrowse() {
                     </p>
                   </div>
                 </div>
-              </div>
-            </div>
+              </div> */}
+              <Calendar />
+            </PopUpWrap>
             <div className="theme-down__categories theme-down">
               <p className="categories__p subttl">Категория</p>
               <div className="categories__theme _orange _active-category">
@@ -168,40 +180,30 @@ function PopBrowse() {
             </div>
             <div className="pop-browse__btn-browse ">
               <div className="btn-group">
-                <button className="btn-browse__edit _btn-bor _hover03">
-                  <a href="#">Редактировать задачу</a>
-                </button>
-                <button className="btn-browse__delete _btn-bor _hover03">
-                  <a href="#">Удалить задачу</a>
-                </button>
+                <ButtonAutoWidth>Редактировать задачу</ButtonAutoWidth>
+                <ButtonAutoWidth>Удалить задачу</ButtonAutoWidth>
               </div>
-              <Link className="btn-browse__close _btn-bg _hover03" to={AppRoutes.HOME}>
+              <Link
+                className="btn-browse__close _btn-bg _hover03"
+                to={AppRoutes.HOME}
+              >
                 Закрыть
               </Link>
             </div>
             <div className="pop-browse__btn-edit _hide">
-              <div className="btn-group">
-                <button className="btn-edit__edit _btn-bg _hover01">
-                  <a href="#">Сохранить</a>
-                </button>
-                <button className="btn-edit__edit _btn-bor _hover03">
-                  <a href="#">Отменить</a>
-                </button>
-                <button
-                  className="btn-edit__delete _btn-bor _hover03"
-                  id="btnDelete"
-                >
-                  <a href="#">Удалить задачу</a>
-                </button>
+              <div className="btn-group" style={{ display: "flex" }}>
+                <ButtonAutoWidthBgFill>Сохранить</ButtonAutoWidthBgFill>
+                <ButtonAutoWidth>Отменить</ButtonAutoWidth>
+                <ButtonAutoWidth id="btnDelete">Удалить задачу</ButtonAutoWidth>
               </div>
-              <button className="btn-edit__close _btn-bg _hover01">
-                <a href="#">Закрыть</a>
-              </button>
+              <Link to={AppRoutes.HOME}>
+                <ButtonAutoWidthBgFill>Закрыть</ButtonAutoWidthBgFill>
+              </Link>
             </div>
-          </div>
-        </div>
-      </div>
-    </div>
+          </PopUpContent>
+        </PopUpBlock>
+      </PopUpContainer>
+    </PopBrowseSt>
   );
 }
 

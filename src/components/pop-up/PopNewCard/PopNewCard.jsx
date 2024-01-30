@@ -1,49 +1,61 @@
 import Calendar from "../../Calendar/Calendar.jsx";
 import { ButtonAutoWidthBgFill } from "../../Buttons/Buttons.styled.js";
+import {
+  PopNewCardSt,
+  PopUpContainer,
+  PopUpBlock,
+  PopUpContent,
+  PopNewCardTtl,
+  PopNewCardBtnClose,
+  PopUpWrap,
+  PopUpForm,
+  PopUpFormBlock,
+  PopUpFormTextarea,
+  PopUpFormInput,
+} from "../PopUp.styled.js";
+import { AppRoutes } from "../../../lib/approutes.js";
+import { Link } from "react-router-dom";
 
-
-function PopNewCard({addCard}) {
+function PopNewCard({ addCard }) {
   return (
-    <div className="pop-new-card" id="popNewCard">
-      <div className="pop-new-card__container">
-        <div className="pop-new-card__block">
-          <div className="pop-new-card__content">
-            <h3 className="pop-new-card__ttl">Создание задачи</h3>
-            <a href="#" className="pop-new-card__close">
-              ✖
-            </a>
-            <div className="pop-new-card__wrap">
-              <form
-                className="pop-new-card__form form-new"
+    <PopNewCardSt id="popNewCard">
+      <PopUpContainer>
+        <PopUpBlock>
+          <PopUpContent>
+            <PopNewCardTtl>Создание задачи</PopNewCardTtl>
+            <Link to={AppRoutes.HOME}>
+              <PopNewCardBtnClose>✖</PopNewCardBtnClose>
+            </Link>
+
+            <PopUpWrap>
+              <PopUpForm
                 id="formNewCard"
                 action="#"
               >
-                <div className="form-new__block">
+                <PopUpFormBlock>
                   <label htmlFor="formTitle" className="subttl">
                     Название задачи
                   </label>
-                  <input
-                    className="form-new__input"
+                  <PopUpFormInput
                     type="text"
                     name="name"
                     id="formTitle"
                     placeholder="Введите название задачи..."
                     autoFocus=""
                   />
-                </div>
-                <div className="form-new__block">
+                </PopUpFormBlock>
+                <PopUpFormBlock>
                   <label htmlFor="textArea" className="subttl">
                     Описание задачи
                   </label>
-                  <textarea
-                    className="form-new__area"
+                  <PopUpFormTextarea
                     name="text"
                     id="textArea"
                     placeholder="Введите описание задачи..."
                     defaultValue={""}
                   />
-                </div>
-              </form>
+                </PopUpFormBlock>
+              </PopUpForm>
               {/* <div className="pop-new-card__calendar calendar">
                 <p className="calendar__ttl subttl">Даты</p>
                 <div className="calendar__block">
@@ -148,7 +160,7 @@ function PopNewCard({addCard}) {
                 </div>
               </div> */}
               <Calendar />
-            </div>
+            </PopUpWrap>
             <div className="pop-new-card__categories categories">
               <p className="categories__p subttl">Категория</p>
               <div className="categories__themes">
@@ -163,13 +175,17 @@ function PopNewCard({addCard}) {
                 </div>
               </div>
             </div>
-            <ButtonAutoWidthBgFill id="btnCreate" onClick={addCard} style={{float: "right"}}>
-                Создать задачу
+            <ButtonAutoWidthBgFill
+              id="btnCreate"
+              onClick={addCard}
+              style={{ float: "right" }}
+            >
+              Создать задачу
             </ButtonAutoWidthBgFill>
-          </div>
-        </div>
-      </div>
-    </div>
+          </PopUpContent>
+        </PopUpBlock>
+      </PopUpContainer>
+    </PopNewCardSt>
   );
 }
 
