@@ -16,7 +16,7 @@ export async function getTasks({ token }) {
   return data;
 }
 
-export async function loginUser({ login, password }) {
+export async function loginUserApi({ login, password }) {
   const response = await fetch(API_URL_USER + "/login", {
     method: "POST",
     body: JSON.stringify({
@@ -33,7 +33,7 @@ export async function loginUser({ login, password }) {
   return user;
 }
 
-export async function registerUser({ login, name, password }) {
+export async function registerUserApi({ login, name, password }) {
   const response = await fetch(API_URL_USER, {
     method: "POST",
     body: JSON.stringify({

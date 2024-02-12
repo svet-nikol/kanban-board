@@ -1,7 +1,9 @@
 import { Link } from "react-router-dom";
 import { AppRoutes } from "../../../lib/approutes";
+import { useUser } from "../../../hooks/useUser";
 
-function PopExit({ toggleIsLoggedIn }) {
+function PopExit() {
+  const { logoutUser } = useUser();
   return (
     <div className="pop-exit" id="popExit">
       <div className="pop-exit__container">
@@ -14,8 +16,7 @@ function PopExit({ toggleIsLoggedIn }) {
               <Link
                 className="pop-exit__exit-yes _hover01"
                 id="exitYes"
-                to={AppRoutes.LOGIN}
-                onClick={toggleIsLoggedIn}
+                onClick={logoutUser}
               >
                 Да, выйти
               </Link>

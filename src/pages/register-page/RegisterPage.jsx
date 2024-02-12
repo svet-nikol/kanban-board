@@ -1,22 +1,24 @@
 import "./signup.css";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { AppRoutes } from "../../lib/approutes.js";
 import { useState } from "react";
-import { registerUser } from "../../api.js";
+import { registerUserApi } from "../../api.js";
+import { useUser } from "../../hooks/useUser.jsx";
 
-export default function RegisterPage({ setIsLoggedIn }) {
-  const [regFormData, setRegFormData] = useState({
+export default function RegisterPage() {
+  const { loginUser } = useUser();
+
+  const regForm = {
     login: "",
     name: "",
     password: "",
-  });
+  };
+  const [regFormData, setRegFormData] = useState(regForm);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setRegFormData({ ...regFormData, [name]: value });
   };
-
-  let navigate = useNavigate();
 
   const [regBtnLoading, setRegBtnLoading] = useState(false);
   const [regFormError, setRegFormError] = useState(null);
@@ -25,13 +27,12 @@ export default function RegisterPage({ setIsLoggedIn }) {
     try {
       e.preventDefault();
       setRegBtnLoading(true);
-      const reggedUser = await registerUser({
+      const reggedUser = await registerUserApi({
         login: regFormData.login,
         name: regFormData.name,
         password: regFormData.password,
       });
-      setIsLoggedIn(reggedUser.user);
-      navigate(AppRoutes.HOME);
+      loginUser(reggedUser.user);
     } catch (error) {
       setRegFormError(error.message);
     } finally {
