@@ -56,7 +56,7 @@ export const PopNewCardTtl = styled(PopUpTtl)`
   margin-bottom: 20px;
 `;
 
-export const PopNewCardBtnClose = styled.a`
+export const PopNewCardBtnClose = styled.p`
   position: absolute;
   top: 20px;
   right: 30px;
@@ -73,7 +73,7 @@ export const PopUpWrap = styled.div`
   justify-content: space-between;
 `;
 
-export const PopUpForm = styled.form`
+export const PopUpForm = styled.div`
   max-width: 370px;
   width: 100%;
   display: block;

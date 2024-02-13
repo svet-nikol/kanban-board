@@ -15,8 +15,57 @@ import {
 } from "../PopUp.styled.js";
 import { AppRoutes } from "../../../lib/approutes.js";
 import { Link } from "react-router-dom";
+import { useState } from "react";
+import { addNewTaskApi } from "../../../api.js";
+import { useUser } from "../../../hooks/useUser.jsx";
+import { useTasks } from "../../../hooks/useTasks.jsx";
 
-function PopNewCard({ addCard }) {
+function PopNewCard() {
+  const { getTasks } = useTasks();
+
+  const [selected, setSelected] = useState(null);
+  const { isLoggedInUser } = useUser();
+
+  const newTaskForm = {
+    title: "",
+    topic: "",
+    description: "",
+  };
+  const [newTask, setNewTask] = useState(newTaskForm);
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setNewTask({ ...newTask, [name]: value });
+  };
+
+  const handleNewTaskAdd = async (e) => {
+    e.preventDefault();
+    let newCard = {
+      ...newTask,
+      data: selected,
+    };
+    await addNewTaskApi({
+      token: isLoggedInUser.token,
+      title: newCard.title,
+      topic: newCard.topic,
+      status: "Без статуса",
+      description: newCard.description,
+      date: newCard.data,
+    }).then((data) => {
+      getTasks(data.tasks);
+    });
+
+    //   try {
+    //     e.preventdefault();
+    //     const addedNewTask = await addNewTaskApi({
+    //       title: newTaskForm.title,
+    //       topic: newTaskForm.topic,
+    //       description: newTaskForm.description,
+    //     });
+    //   } catch (error) {}
+    // };
+  };
+
   return (
     <PopNewCardSt id="popNewCard">
       <PopUpContainer>
@@ -28,17 +77,16 @@ function PopNewCard({ addCard }) {
             </Link>
 
             <PopUpWrap>
-              <PopUpForm
-                id="formNewCard"
-                action="#"
-              >
+              <PopUpForm id="formNewCard" action="#">
                 <PopUpFormBlock>
                   <label htmlFor="formTitle" className="subttl">
                     Название задачи
                   </label>
                   <PopUpFormInput
+                    value={newTask.title}
+                    onChange={handleInputChange}
                     type="text"
-                    name="name"
+                    name="title"
                     id="formTitle"
                     placeholder="Введите название задачи..."
                     autoFocus=""
@@ -49,10 +97,12 @@ function PopNewCard({ addCard }) {
                     Описание задачи
                   </label>
                   <PopUpFormTextarea
-                    name="text"
+                    value={newTask.description}
+                    onChange={handleInputChange}
+                    name="description"
                     id="textArea"
                     placeholder="Введите описание задачи..."
-                    defaultValue={""}
+                    // defaultValue={""}
                   />
                 </PopUpFormBlock>
               </PopUpForm>
@@ -159,11 +209,11 @@ function PopNewCard({ addCard }) {
                   </div>
                 </div>
               </div> */}
-              <Calendar />
+              <Calendar selected={selected} setSelected={setSelected} />
             </PopUpWrap>
             <div className="pop-new-card__categories categories">
               <p className="categories__p subttl">Категория</p>
-              <div className="categories__themes">
+              {/* <div className="categories__themes">
                 <div className="categories__theme _orange _active-category">
                   <p className="_orange">Web Design</p>
                 </div>
@@ -173,11 +223,41 @@ function PopNewCard({ addCard }) {
                 <div className="categories__theme _purple">
                   <p className="_purple">Copywriting</p>
                 </div>
+              </div> */}
+
+              {/* переделать в массив и метод map чтобы оптимзировать разметку этих radio кнопок */}
+              <div className="prod_checbox">
+                <div className="radio-toolbar">
+                  <input
+                    type="radio"
+                    id="radio1"
+                    name="topic"
+                    value="Web Design"
+                    onChange={handleInputChange}
+                  />
+                  <label htmlFor="radio1">Web Design</label>
+                  <input
+                    type="radio"
+                    id="radio2"
+                    name="topic"
+                    value="Research"
+                    onChange={handleInputChange}
+                  />
+                  <label htmlFor="radio2">Research</label>
+                  <input
+                    type="radio"
+                    id="radio3"
+                    name="topic"
+                    value="Copywriting"
+                    onChange={handleInputChange}
+                  />
+                  <label htmlFor="radio3">Copywriting</label>
+                </div>
               </div>
             </div>
             <ButtonAutoWidthBgFill
               id="btnCreate"
-              onClick={addCard}
+              onClick={handleNewTaskAdd}
               style={{ float: "right" }}
             >
               Создать задачу

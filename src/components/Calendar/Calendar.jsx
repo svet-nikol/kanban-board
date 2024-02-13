@@ -1,11 +1,13 @@
-import React from "react";
+// import React, { useState } from "react";
+// import { useState } from "react";
 import { format } from "date-fns";
 import { DayPicker } from "react-day-picker";
 import "react-day-picker/dist/style.css";
 import { ru } from "date-fns/locale";
 
-export default function Calendar() {
-  const [selected, setSelected] = React.useState(null);
+export default function Calendar({selected, setSelected}) {
+  // const [selected, setSelected] = React.useState(null);
+  // const [selected, setSelected] = useState(null);
 
   const customFormatMonthsDays = {
     ...ru,

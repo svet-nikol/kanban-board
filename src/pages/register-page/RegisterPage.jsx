@@ -84,7 +84,9 @@ export default function RegisterPage() {
                     className="modal__btn-signup-ent _hover01"
                     id="SignUpEnter"
                     disabled={regBtnLoading}
-                    style={{backgroundColor: regBtnLoading ? "#94A6BE" : "#565EEF"}}
+                    style={{
+                      backgroundColor: regBtnLoading ? "#94A6BE" : "#565EEF",
+                    }}
                     onClick={handleRegUserClick}
                   >
                     Зарегистрироваться

@@ -1,6 +1,7 @@
 import Column from "../Column/Column";
 import { Main, MainBlock, MainContentSt } from "./MainContent.styled.js";
 import { Container } from "../Common/Common.styled.js";
+import { useTasks } from "../../hooks/useTasks.jsx";
 
 const statusList = [
   "Без статуса",
@@ -10,7 +11,8 @@ const statusList = [
   "Готово",
 ];
 
-function MainContent({ cardList, isLoaded }) {
+function MainContent({ isLoaded }) {
+  const { tasks } = useTasks();
   return (
     <Main>
       <Container>
@@ -22,7 +24,7 @@ function MainContent({ cardList, isLoaded }) {
                   <Column
                     key={item}
                     title={item}
-                    cardList={cardList.filter((card) => card.status === item)}
+                    cardList={tasks.filter((card) => card.status === item)}
                   />
                 ))}
           </MainContentSt>

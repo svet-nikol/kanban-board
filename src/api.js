@@ -1,7 +1,7 @@
 const API_URL_USER = "https://wedev-api.sky.pro/api/user";
 const API_URL = "https://wedev-api.sky.pro/api/kanban";
 
-export async function getTasks({ token }) {
+export async function getTasksApi({ token }) {
   const response = await fetch(API_URL, {
     headers: {
       Authorization: `Bearer ${token}`,
@@ -51,7 +51,7 @@ export async function registerUserApi({ login, name, password }) {
   return user;
 }
 
-export async function addNewTask({
+export async function addNewTaskApi({
   token,
   title,
   topic,
@@ -62,13 +62,15 @@ export async function addNewTask({
   const response = await fetch(API_URL, {
     method: "POST",
     body: JSON.stringify({
-      token,
       title,
       topic,
       status,
       description,
       date,
     }),
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
   });
   if (response.status === 400) {
     throw new Error("Ошибка формата введеных данных");

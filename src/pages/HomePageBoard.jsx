@@ -5,18 +5,19 @@ import Header from "../components/Header/Header.jsx";
 import MainContent from "../components/MainContent/MainContent.jsx";
 import "../App.css";
 import { Outlet } from "react-router-dom";
-import { getTasks } from "../api.js";
+import { getTasksApi } from "../api.js";
 import { useUser } from "../hooks/useUser.jsx";
+import { useTasks } from "../hooks/useTasks.jsx";
 
 export default function HomePageBoard() {
-  const {isLoggedInUser} = useUser();
-  const [cards, setCards] = useState(null);
+  const { isLoggedInUser } = useUser();
+  const { setTasks } = useTasks();
   const [getCardsIsLoaded, setGetCardsIsLoaded] = useState(true);
   const [getCardsError, setGetCardsError] = useState(null);
   useEffect(() => {
-    getTasks({token: isLoggedInUser.token})
-      .then((cards) => {
-        setCards(cards.tasks);
+    getTasksApi({ token: isLoggedInUser.token })
+      .then((data) => {
+        setTasks(data.tasks);
       })
       .catch((error) => {
         setGetCardsError(error.message);
@@ -24,7 +25,7 @@ export default function HomePageBoard() {
       .finally(() => {
         setGetCardsIsLoaded(false);
       });
-  }, [isLoggedInUser]);
+  }, [isLoggedInUser, setTasks]);
 
   return (
     <>
@@ -32,11 +33,11 @@ export default function HomePageBoard() {
       <Wrapper>
         <Outlet />
 
-        <Header user={isLoggedInUser}/>
+        <Header user={isLoggedInUser} />
         {getCardsError ? (
           <p style={{ color: "red" }}>{getCardsError}</p>
         ) : (
-          <MainContent isLoaded={getCardsIsLoaded} cardList={cards} />
+          <MainContent isLoaded={getCardsIsLoaded} />
         )}
       </Wrapper>
     </>
