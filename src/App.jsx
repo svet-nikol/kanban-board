@@ -9,40 +9,26 @@ import PrivateRoute from "./components/PrivateRoute/PrivateRoute.jsx";
 import CardPage from "./pages/CardPage.jsx";
 import ExitPage from "./pages/ExitPage.jsx";
 import NewCardPage from "./pages/NewCardPage.jsx";
-import { useState } from "react";
-import { cardList } from "./data.js";
-
-
+import { TasksProvider } from "./contexts/tasks.jsx";
 
 function App() {
-  const [isLoggedIn, setIsLoggedIn] = useState(null);
-  function toggleIsLoggedIn() {
-    setIsLoggedIn((prev) => !prev);
-  }
-  function addCard() {
-    cardList.push({
-    id: cardList.length + 1,
-    theme: "Copywriting",
-    title: "Новая задача",
-    date: "30.10.23",
-    status: "Без статуса",
-    classNameTheme: "_purple",
-    });
-    console.log(cardList);
-    return cardList;
-    }
-
   return (
     <Routes>
-      <Route element={<PrivateRoute isLoggedIn={isLoggedIn} />}>
-        <Route path={AppRoutes.HOME} element={<HomePageBoard isLoggedIn={isLoggedIn}/>}>
+      <Route
+        element={
+          <TasksProvider>
+            <PrivateRoute />
+          </TasksProvider>
+        }
+      >
+        <Route path={AppRoutes.HOME} element={<HomePageBoard />}>
           <Route path={`${AppRoutes.CARD}/:cardId`} element={<CardPage />} />
-          <Route path={AppRoutes.NEW_CARD} element={<NewCardPage addCard={addCard}/>} />
-          <Route path={AppRoutes.EXIT} element={<ExitPage toggleIsLoggedIn={toggleIsLoggedIn} />} />
+          <Route path={AppRoutes.NEW_CARD} element={<NewCardPage />} />
+          <Route path={AppRoutes.EXIT} element={<ExitPage />} />
         </Route>
       </Route>
-      <Route path={AppRoutes.LOGIN} element={<LoginPage setIsLoggedIn={setIsLoggedIn} />} />
-      <Route path={AppRoutes.REGISTER} element={<RegisterPage setIsLoggedIn={setIsLoggedIn} />} />
+      <Route path={AppRoutes.LOGIN} element={<LoginPage />} />
+      <Route path={AppRoutes.REGISTER} element={<RegisterPage />} />
       <Route path={AppRoutes.NOT_FOUND} element={<NotFoundPage />} />
     </Routes>
   );

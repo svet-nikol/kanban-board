@@ -37,7 +37,6 @@ function Header({user}) {
               <HeaderBtnNewTask
                 className="_hover01"
                 id="btnMainNew"
-                // onClick={addCard}
               >
                 Создать новую задачу
               </HeaderBtnNewTask>

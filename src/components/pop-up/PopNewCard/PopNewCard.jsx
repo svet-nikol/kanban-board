@@ -1,49 +1,116 @@
+import Calendar from "../../Calendar/Calendar.jsx";
+import { ButtonAutoWidthBgFill } from "../../Buttons/Buttons.styled.js";
+import {
+  PopNewCardSt,
+  PopUpContainer,
+  PopUpBlock,
+  PopUpContent,
+  PopNewCardTtl,
+  PopNewCardBtnClose,
+  PopUpWrap,
+  PopUpForm,
+  PopUpFormBlock,
+  PopUpFormTextarea,
+  PopUpFormInput,
+} from "../PopUp.styled.js";
+import { AppRoutes } from "../../../lib/approutes.js";
 import { Link } from "react-router-dom";
-import { AppRoutes } from "../../../lib/approutes";
+import { useState } from "react";
+import { addNewTaskApi } from "../../../api.js";
+import { useUser } from "../../../hooks/useUser.jsx";
+import { useTasks } from "../../../hooks/useTasks.jsx";
 
-function PopNewCard({addCard}) {
+function PopNewCard() {
+  const { getTasks } = useTasks();
+
+  const [selected, setSelected] = useState(null);
+  const { isLoggedInUser } = useUser();
+
+  const newTaskForm = {
+    title: "",
+    topic: "",
+    description: "",
+  };
+  const [newTask, setNewTask] = useState(newTaskForm);
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setNewTask({ ...newTask, [name]: value });
+  };
+
+  const [createNewTaskBtnLoading, setCreateNewTaskBtnLoading] = useState(false);
+  const [newTaskFormError, setNewTaskFormError] = useState(null);
+
+  const handleNewTaskAdd = async (e) => {
+    let newCard = {
+      ...newTask,
+      data: selected,
+    };
+    try {
+      e.preventDefault();
+      setCreateNewTaskBtnLoading(true);
+      await addNewTaskApi({
+        token: isLoggedInUser.token,
+        title: newCard.title,
+        topic: newCard.topic,
+        status: "Без статуса",
+        description: newCard.description,
+        date: newCard.data,
+      }).then((data) => {
+        getTasks(data.tasks);
+      });
+    } catch (error) {
+      setNewTaskFormError(error.message);
+    } finally {
+      setCreateNewTaskBtnLoading(true);
+    }
+  };
+
+  const topicsMeanings = ["Web Design", "Research", "Copywriting"];
+
   return (
-    <div className="pop-new-card" id="popNewCard">
-      <div className="pop-new-card__container">
-        <div className="pop-new-card__block">
-          <div className="pop-new-card__content">
-            <h3 className="pop-new-card__ttl">Создание задачи</h3>
-            <a href="#" className="pop-new-card__close">
-              ✖
-            </a>
-            <div className="pop-new-card__wrap">
-              <form
-                className="pop-new-card__form form-new"
-                id="formNewCard"
-                action="#"
-              >
-                <div className="form-new__block">
-                  <label htmlFor="formTitle" className="subttl">
-                    Название задачи
-                  </label>
-                  <input
-                    className="form-new__input"
-                    type="text"
-                    name="name"
-                    id="formTitle"
-                    placeholder="Введите название задачи..."
-                    autoFocus=""
-                  />
-                </div>
-                <div className="form-new__block">
-                  <label htmlFor="textArea" className="subttl">
-                    Описание задачи
-                  </label>
-                  <textarea
-                    className="form-new__area"
-                    name="text"
-                    id="textArea"
-                    placeholder="Введите описание задачи..."
-                    defaultValue={""}
-                  />
-                </div>
-              </form>
-              <div className="pop-new-card__calendar calendar">
+    <PopNewCardSt id="popNewCard">
+      <PopUpContainer>
+        <PopUpBlock>
+          {newTaskFormError ? (
+            <p style={{ color: "red" }}>{newTaskFormError}</p>
+          ) : (
+            <PopUpContent>
+              <PopNewCardTtl>Создание задачи</PopNewCardTtl>
+              <Link to={AppRoutes.HOME}>
+                <PopNewCardBtnClose>✖</PopNewCardBtnClose>
+              </Link>
+              <PopUpWrap>
+                <PopUpForm id="formNewCard" action="#">
+                  <PopUpFormBlock>
+                    <label htmlFor="formTitle" className="subttl">
+                      Название задачи
+                    </label>
+                    <PopUpFormInput
+                      value={newTask.title}
+                      onChange={handleInputChange}
+                      type="text"
+                      name="title"
+                      id="formTitle"
+                      placeholder="Введите название задачи..."
+                      autoFocus=""
+                    />
+                  </PopUpFormBlock>
+                  <PopUpFormBlock>
+                    <label htmlFor="textArea" className="subttl">
+                      Описание задачи
+                    </label>
+                    <PopUpFormTextarea
+                      value={newTask.description}
+                      onChange={handleInputChange}
+                      name="description"
+                      id="textArea"
+                      placeholder="Введите описание задачи..."
+                      // defaultValue={""}
+                    />
+                  </PopUpFormBlock>
+                </PopUpForm>
+                {/* <div className="pop-new-card__calendar calendar">
                 <p className="calendar__ttl subttl">Даты</p>
                 <div className="calendar__block">
                   <div className="calendar__nav">
@@ -145,11 +212,12 @@ function PopNewCard({addCard}) {
                     </p>
                   </div>
                 </div>
-              </div>
-            </div>
-            <div className="pop-new-card__categories categories">
-              <p className="categories__p subttl">Категория</p>
-              <div className="categories__themes">
+              </div> */}
+                <Calendar selected={selected} setSelected={setSelected} />
+              </PopUpWrap>
+              <div className="pop-new-card__categories categories">
+                <p className="categories__p subttl">Категория</p>
+                {/* <div className="categories__themes">
                 <div className="categories__theme _orange _active-category">
                   <p className="_orange">Web Design</p>
                 </div>
@@ -159,17 +227,44 @@ function PopNewCard({addCard}) {
                 <div className="categories__theme _purple">
                   <p className="_purple">Copywriting</p>
                 </div>
+              </div> */}
+
+                <div className="prod_checbox">
+                  <div className="radio-toolbar">
+                    {topicsMeanings.map((item) => (
+                      <button key={item}>
+                        <input
+                          type="radio"
+                          id="radio1"
+                          name="topic"
+                          value={item}
+                          onChange={handleInputChange}
+                        />
+                        <label htmlFor="radio1" >{item}</label>
+                      </button>
+                    ))}
+                  </div>
+                </div>
               </div>
-            </div>
-            <Link onClick={addCard} to={AppRoutes.HOME}>
-              <button className="form-new__create _hover01" id="btnCreate">
-                Создать задачу
-              </button>
-            </Link>
-          </div>
-        </div>
-      </div>
-    </div>
+              <ButtonAutoWidthBgFill
+                id="btnCreate"
+                onClick={handleNewTaskAdd}
+                style={{
+                  float: "right",
+                  backgroundColor: createNewTaskBtnLoading ? "#94A6BE" : "",
+                  border: createNewTaskBtnLoading ? "0.7px solid #94A6BE" : "",
+                }}
+                disabled={createNewTaskBtnLoading}
+              >
+                {createNewTaskBtnLoading
+                  ? "Задача добавляется..."
+                  : "Создать задачу"}
+              </ButtonAutoWidthBgFill>
+            </PopUpContent>
+          )}
+        </PopUpBlock>
+      </PopUpContainer>
+    </PopNewCardSt>
   );
 }
 
