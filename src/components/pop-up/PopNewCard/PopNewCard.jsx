@@ -66,6 +66,8 @@ function PopNewCard() {
     }
   };
 
+  const topicsMeanings = ["Web Design", "Research", "Copywriting"];
+
   return (
     <PopNewCardSt id="popNewCard">
       <PopUpContainer>
@@ -227,33 +229,20 @@ function PopNewCard() {
                 </div>
               </div> */}
 
-                {/* переделать в массив и метод map чтобы оптимзировать разметку этих radio кнопок */}
                 <div className="prod_checbox">
                   <div className="radio-toolbar">
-                    <input
-                      type="radio"
-                      id="radio1"
-                      name="topic"
-                      value="Web Design"
-                      onChange={handleInputChange}
-                    />
-                    <label htmlFor="radio1">Web Design</label>
-                    <input
-                      type="radio"
-                      id="radio2"
-                      name="topic"
-                      value="Research"
-                      onChange={handleInputChange}
-                    />
-                    <label htmlFor="radio2">Research</label>
-                    <input
-                      type="radio"
-                      id="radio3"
-                      name="topic"
-                      value="Copywriting"
-                      onChange={handleInputChange}
-                    />
-                    <label htmlFor="radio3">Copywriting</label>
+                    {topicsMeanings.map((item) => (
+                      <button key={item}>
+                        <input
+                          type="radio"
+                          id="radio1"
+                          name="topic"
+                          value={item}
+                          onChange={handleInputChange}
+                        />
+                        <label htmlFor="radio1" >{item}</label>
+                      </button>
+                    ))}
                   </div>
                 </div>
               </div>
