@@ -38,75 +38,77 @@ function PopNewCard() {
     setNewTask({ ...newTask, [name]: value });
   };
 
+  const [createNewTaskBtnLoading, setCreateNewTaskBtnLoading] = useState(false);
+  const [newTaskFormError, setNewTaskFormError] = useState(null);
+
   const handleNewTaskAdd = async (e) => {
-    e.preventDefault();
     let newCard = {
       ...newTask,
       data: selected,
     };
-    await addNewTaskApi({
-      token: isLoggedInUser.token,
-      title: newCard.title,
-      topic: newCard.topic,
-      status: "Без статуса",
-      description: newCard.description,
-      date: newCard.data,
-    }).then((data) => {
-      getTasks(data.tasks);
-    });
-
-    //   try {
-    //     e.preventdefault();
-    //     const addedNewTask = await addNewTaskApi({
-    //       title: newTaskForm.title,
-    //       topic: newTaskForm.topic,
-    //       description: newTaskForm.description,
-    //     });
-    //   } catch (error) {}
-    // };
+    try {
+      e.preventDefault();
+      setCreateNewTaskBtnLoading(true);
+      await addNewTaskApi({
+        token: isLoggedInUser.token,
+        title: newCard.title,
+        topic: newCard.topic,
+        status: "Без статуса",
+        description: newCard.description,
+        date: newCard.data,
+      }).then((data) => {
+        getTasks(data.tasks);
+      });
+    } catch (error) {
+      setNewTaskFormError(error.message);
+    } finally {
+      setCreateNewTaskBtnLoading(true);
+    }
   };
 
   return (
     <PopNewCardSt id="popNewCard">
       <PopUpContainer>
         <PopUpBlock>
-          <PopUpContent>
-            <PopNewCardTtl>Создание задачи</PopNewCardTtl>
-            <Link to={AppRoutes.HOME}>
-              <PopNewCardBtnClose>✖</PopNewCardBtnClose>
-            </Link>
-
-            <PopUpWrap>
-              <PopUpForm id="formNewCard" action="#">
-                <PopUpFormBlock>
-                  <label htmlFor="formTitle" className="subttl">
-                    Название задачи
-                  </label>
-                  <PopUpFormInput
-                    value={newTask.title}
-                    onChange={handleInputChange}
-                    type="text"
-                    name="title"
-                    id="formTitle"
-                    placeholder="Введите название задачи..."
-                    autoFocus=""
-                  />
-                </PopUpFormBlock>
-                <PopUpFormBlock>
-                  <label htmlFor="textArea" className="subttl">
-                    Описание задачи
-                  </label>
-                  <PopUpFormTextarea
-                    value={newTask.description}
-                    onChange={handleInputChange}
-                    name="description"
-                    id="textArea"
-                    placeholder="Введите описание задачи..."
-                    // defaultValue={""}
-                  />
-                </PopUpFormBlock>
-              </PopUpForm>
-              {/* <div className="pop-new-card__calendar calendar">
+          {newTaskFormError ? (
+            <p style={{ color: "red" }}>{newTaskFormError}</p>
+          ) : (
+            <PopUpContent>
+              <PopNewCardTtl>Создание задачи</PopNewCardTtl>
+              <Link to={AppRoutes.HOME}>
+                <PopNewCardBtnClose>✖</PopNewCardBtnClose>
+              </Link>
+              <PopUpWrap>
+                <PopUpForm id="formNewCard" action="#">
+                  <PopUpFormBlock>
+                    <label htmlFor="formTitle" className="subttl">
+                      Название задачи
+                    </label>
+                    <PopUpFormInput
+                      value={newTask.title}
+                      onChange={handleInputChange}
+                      type="text"
+                      name="title"
+                      id="formTitle"
+                      placeholder="Введите название задачи..."
+                      autoFocus=""
+                    />
+                  </PopUpFormBlock>
+                  <PopUpFormBlock>
+                    <label htmlFor="textArea" className="subttl">
+                      Описание задачи
+                    </label>
+                    <PopUpFormTextarea
+                      value={newTask.description}
+                      onChange={handleInputChange}
+                      name="description"
+                      id="textArea"
+                      placeholder="Введите описание задачи..."
+                      // defaultValue={""}
+                    />
+                  </PopUpFormBlock>
+                </PopUpForm>
+                {/* <div className="pop-new-card__calendar calendar">
                 <p className="calendar__ttl subttl">Даты</p>
                 <div className="calendar__block">
                   <div className="calendar__nav">
@@ -209,11 +211,11 @@ function PopNewCard() {
                   </div>
                 </div>
               </div> */}
-              <Calendar selected={selected} setSelected={setSelected} />
-            </PopUpWrap>
-            <div className="pop-new-card__categories categories">
-              <p className="categories__p subttl">Категория</p>
-              {/* <div className="categories__themes">
+                <Calendar selected={selected} setSelected={setSelected} />
+              </PopUpWrap>
+              <div className="pop-new-card__categories categories">
+                <p className="categories__p subttl">Категория</p>
+                {/* <div className="categories__themes">
                 <div className="categories__theme _orange _active-category">
                   <p className="_orange">Web Design</p>
                 </div>
@@ -225,44 +227,52 @@ function PopNewCard() {
                 </div>
               </div> */}
 
-              {/* переделать в массив и метод map чтобы оптимзировать разметку этих radio кнопок */}
-              <div className="prod_checbox">
-                <div className="radio-toolbar">
-                  <input
-                    type="radio"
-                    id="radio1"
-                    name="topic"
-                    value="Web Design"
-                    onChange={handleInputChange}
-                  />
-                  <label htmlFor="radio1">Web Design</label>
-                  <input
-                    type="radio"
-                    id="radio2"
-                    name="topic"
-                    value="Research"
-                    onChange={handleInputChange}
-                  />
-                  <label htmlFor="radio2">Research</label>
-                  <input
-                    type="radio"
-                    id="radio3"
-                    name="topic"
-                    value="Copywriting"
-                    onChange={handleInputChange}
-                  />
-                  <label htmlFor="radio3">Copywriting</label>
+                {/* переделать в массив и метод map чтобы оптимзировать разметку этих radio кнопок */}
+                <div className="prod_checbox">
+                  <div className="radio-toolbar">
+                    <input
+                      type="radio"
+                      id="radio1"
+                      name="topic"
+                      value="Web Design"
+                      onChange={handleInputChange}
+                    />
+                    <label htmlFor="radio1">Web Design</label>
+                    <input
+                      type="radio"
+                      id="radio2"
+                      name="topic"
+                      value="Research"
+                      onChange={handleInputChange}
+                    />
+                    <label htmlFor="radio2">Research</label>
+                    <input
+                      type="radio"
+                      id="radio3"
+                      name="topic"
+                      value="Copywriting"
+                      onChange={handleInputChange}
+                    />
+                    <label htmlFor="radio3">Copywriting</label>
+                  </div>
                 </div>
               </div>
-            </div>
-            <ButtonAutoWidthBgFill
-              id="btnCreate"
-              onClick={handleNewTaskAdd}
-              style={{ float: "right" }}
-            >
-              Создать задачу
-            </ButtonAutoWidthBgFill>
-          </PopUpContent>
+              <ButtonAutoWidthBgFill
+                id="btnCreate"
+                onClick={handleNewTaskAdd}
+                style={{
+                  float: "right",
+                  backgroundColor: createNewTaskBtnLoading ? "#94A6BE" : "",
+                  border: createNewTaskBtnLoading ? "0.7px solid #94A6BE" : "",
+                }}
+                disabled={createNewTaskBtnLoading}
+              >
+                {createNewTaskBtnLoading
+                  ? "Задача добавляется..."
+                  : "Создать задачу"}
+              </ButtonAutoWidthBgFill>
+            </PopUpContent>
+          )}
         </PopUpBlock>
       </PopUpContainer>
     </PopNewCardSt>
