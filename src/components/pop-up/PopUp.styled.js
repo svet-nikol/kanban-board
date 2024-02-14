@@ -102,6 +102,8 @@ const commonInputTextarea = css`
     line-height: 1px;
     color: #94a6be;
     letter-spacing: -0.14px;
+    font-family: "Roboto";
+    padding-top: 14px;
   }
   &::placeholder {
     font-weight: 400;
@@ -109,6 +111,8 @@ const commonInputTextarea = css`
     line-height: 1px;
     color: #94a6be;
     letter-spacing: -0.14px;
+    font-family: "Roboto";
+    padding-top: 14px;
   }
 `;
 

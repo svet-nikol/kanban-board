@@ -1,0 +1,51 @@
+.rdp {
+    --rdp-cell-size: 24px;
+    --rdp-caption-font-size: 14px;
+    --rdp-accent-color: #94A6BE;
+    /* --rdp-background-color: #e7edff; */
+    --rdp-accent-color-dark: #3003e1;
+    --rdp-background-color-dark: #180270;
+    --rdp-outline: 2px solid var(--rdp-accent-color);
+    --rdp-outline-selected: 3px solid var(--rdp-accent-color);
+    --rdp-selected-color: #fff;
+    margin: 0;
+    }
+
+.rdp-table {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+}
+
+.rdp-caption_label {
+    padding: 0px;
+    margin: 0.2em;
+    font-weight: 600;
+    text-transform: capitalize;
+}
+
+.rdp-table {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+}
+.rdp-head {
+    margin: 0.5em;
+}
+
+.rdp-tfoot {
+    margin: 0.55em;
+    padding-top: 4px;
+}
+
+.rdp-head_row {
+    display: flex;
+    justify-content: space-between;
+    height: 12px;
+}
+
+.rdp-head_cell {
+    font-size: 10px;
+    font-weight: 500;
+    text-transform: lowercase;
+}

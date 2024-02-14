@@ -213,7 +213,10 @@ function PopNewCard() {
                   </div>
                 </div>
               </div> */}
-                <Calendar selected={selected} setSelected={setSelected} />
+                <div className="pop-new-card__calendar calendar">
+                  <p className="calendar__ttl subttl">Даты</p>
+                  <Calendar selected={selected} setSelected={setSelected} />
+                </div>
               </PopUpWrap>
               <div className="pop-new-card__categories categories">
                 <p className="categories__p subttl">Категория</p>
@@ -240,7 +243,7 @@ function PopNewCard() {
                           value={item}
                           onChange={handleInputChange}
                         />
-                        <label htmlFor="radio1" >{item}</label>
+                        <label htmlFor="radio1">{item}</label>
                       </button>
                     ))}
                   </div>
