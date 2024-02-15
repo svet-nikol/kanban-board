@@ -58,14 +58,51 @@ export const LinkButtonFixWidth = styled(Link)`
     border: 0.7px solid #33399b;
     color: #ffffff;
   }
-  /* &a {
-    width: 44px;
-    height: 100%;
-    color: #565eef;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  } */
+`;
+
+export const LinkButtonFixWidthBgFill = styled(Link)`
+  height: 30px;
+  background-color: #565eef;
+  border-radius: 4px;
+  border: none;
+  outline: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  line-height: 21px;
+  font-weight: 500;
+  letter-spacing: -0.14px;
+  color: #ffffff;
+  margin-right: 10px;
+  @media (max-width: ${breakpoints.sm}px) {
+    width: 100%;
+    height: 40px;
+    margin-right: 0;
+    margin-bottom: 10px;
+  }
+`;
+
+export const LinkButtonFixWidthTransparent = styled(LinkButtonFixWidthBgFill)`
+  background-color: transparent;
+  border: 0.7px solid var(--palette-navy-60, #565eef);
+  color: #565eef;
+  margin-right: 0px;
+`;
+
+export const LinkButtonBgFill_153 = styled(LinkButtonFixWidthBgFill)`
+  width: 153px;
+  @media (max-width: ${breakpoints.sm}px) {
+    width: 100%;
+  }
+`;
+
+export const LinkButtonTransparent_153 = styled(LinkButtonFixWidthTransparent)`
+  width: 153px;
+  @media (max-width: ${breakpoints.sm}px) {
+    width: 100%;
+    margin-bottom: 0px;
+  }
 `;
 
 // const sizes = {
@@ -116,7 +153,7 @@ export const LinkButtonFixWidth = styled(Link)`
 // `;
 // export default Button;
 
-export const Button = styled.button`
+/* export const Button = styled.button`
   width: 248px;
   height: 30px;
   padding: 8px 10px;
@@ -132,4 +169,4 @@ export const Button = styled.button`
     height: 40px;
     line-height: 150%;
   }
-`;
+`; */
