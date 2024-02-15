@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import { breakpoints } from "../../lib/breakpoints.js";
+import { Link } from "react-router-dom";
 
 export const ButtonAutoWidth = styled.button`
   display: flex;
@@ -30,6 +31,41 @@ export const ButtonAutoWidthBgFill = styled(ButtonAutoWidth)`
     background-color: #33399b;
     border: 0.7px solid #33399b;
   }
+`;
+
+export const LinkButtonFixWidth = styled(Link)`
+  width: 72px;
+  height: 30px;
+  background-color: transparent;
+  border-radius: 4px;
+  border: 0.7px solid var(--palette-navy-60, #565eef);
+  outline: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  line-height: 21px;
+  font-weight: 500;
+  letter-spacing: -0.14px;
+  color: #565eef;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto;
+
+  &:hover {
+    background-color: #33399b;
+    border: 0.7px solid #33399b;
+    color: #ffffff;
+  }
+  /* &a {
+    width: 44px;
+    height: 100%;
+    color: #565eef;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  } */
 `;
 
 // const sizes = {

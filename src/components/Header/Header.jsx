@@ -7,12 +7,19 @@ import {
   HeaderNav,
   HeaderBtnNewTask,
   HeaderUser,
+  HeaderPopUserSet,
+  HeaderPopUserName,
+  HeaderPopUserMail,
+  HeaderPopUserThemeWrapper,
+  HeaderPopUserThemeHeader,
+  HeaderThemeCheckbox,
 } from "./Header.styled.js";
 import { GlobalStyle } from "../../Global.Styled.js";
 import { AppRoutes } from "../../lib/approutes.js";
 import { Link } from "react-router-dom";
+import { LinkButtonFixWidth } from "../Buttons/Buttons.styled.js";
 
-function Header({user}) {
+function Header({ user }) {
   const [isOpened, setIsOpened] = useState(false);
   function togglePopUp() {
     setIsOpened((prev) => !prev);
@@ -23,21 +30,18 @@ function Header({user}) {
       <Container>
         <HeaderBlock>
           <div className="header__logo _show _light">
-            <a href="" target="_self">
+            <Link to={AppRoutes.HOME} target="_self">
               <HeaderLogoImg src="public/images/logo.png" alt="logo" />
-            </a>
+            </Link>
           </div>
           <div className="header__logo _dark">
-            <a href="" target="_self">
+            <Link to={AppRoutes.HOME} target="_self">
               <HeaderLogoImg src="public/images/logo_dark.png" alt="logo" />
-            </a>
+            </Link>
           </div>
           <HeaderNav>
             <Link to={AppRoutes.NEW_CARD}>
-              <HeaderBtnNewTask
-                className="_hover01"
-                id="btnMainNew"
-              >
+              <HeaderBtnNewTask className="_hover01" id="btnMainNew">
                 Создать новую задачу
               </HeaderBtnNewTask>
             </Link>
@@ -46,22 +50,25 @@ function Header({user}) {
               {user.name}
             </HeaderUser>
             {isOpened && (
-              <div className="header__pop-user-set pop-user-set">
-                <p className="pop-user-set__name">{user.name}</p>
-                <p className="pop-user-set__mail">{user.login}</p>
-                <div className="pop-user-set__theme">
-                  <p>Темная тема</p>
-                  <input type="checkbox" className="checkbox" name="checkbox" />
-                </div>
-                <Link
-                  className="pop-exit__exit-no _hover03"
+              <HeaderPopUserSet>
+                <HeaderPopUserName>{user.name}</HeaderPopUserName>
+                <HeaderPopUserMail>{user.login}</HeaderPopUserMail>
+                <HeaderPopUserThemeWrapper>
+                  <HeaderPopUserThemeHeader>
+                    Темная тема
+                  </HeaderPopUserThemeHeader>
+                  <HeaderThemeCheckbox type="checkbox" name="checkbox" />
+                </HeaderPopUserThemeWrapper>
+                <LinkButtonFixWidth
+                  className="_hover03"
                   to={AppRoutes.EXIT}
                   onClick={togglePopUp}
                 >
                   Выйти
-                </Link>
-              </div>
+                </LinkButtonFixWidth>
+              </HeaderPopUserSet>
             )}
+            
           </HeaderNav>
         </HeaderBlock>
       </Container>
