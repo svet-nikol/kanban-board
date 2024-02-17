@@ -22,6 +22,10 @@ export const ButtonAutoWidth = styled.button`
     border: 0.7px solid #33399b;
     color: #ffffff;
   }
+  @media (max-width: ${breakpoints.md}px) {
+    width: 100%;
+    height: 40px;
+  }
 `;
 
 export const ButtonAutoWidthBgFill = styled(ButtonAutoWidth)`

@@ -1,5 +1,6 @@
 import styled, { css } from "styled-components";
 import { breakpoints } from "../../lib/breakpoints";
+import { themeStyles } from "../../lib/theme";
 
 export const PopNewCardSt = styled.div`
   display: block;
@@ -11,6 +12,9 @@ export const PopNewCardSt = styled.div`
   top: 0;
   left: 0;
   z-index: 6;
+  @media (max-width: ${breakpoints.lg}px) {
+    top: 70px;
+  }
 `;
 
 export const PopBrowseSt = styled(PopNewCardSt)`
@@ -27,6 +31,14 @@ export const PopUpContainer = styled.div`
   align-items: center;
   justify-content: center;
   background: rgba(0, 0, 0, 0.4);
+  @media (max-width: ${breakpoints.lg}px) {
+    padding: 0;
+    justify-content: flex-start;
+  };
+  @media (max-width: ${breakpoints.md}px) {
+    padding: 0;
+    justify-content: flex-start;
+  }
 `;
 
 export const PopUpBlock = styled.div`
@@ -39,11 +51,24 @@ export const PopUpBlock = styled.div`
   border-radius: 10px;
   border: 0.7px solid #d4dbe5;
   position: relative;
+  @media (max-width: ${breakpoints.lg}px) {
+    border-radius: 0;
+  }
+  @media (max-width: ${breakpoints.md}px) {
+    padding: 20px 16px 32px;
+  }
 `;
 
 export const PopUpContent = styled.div`
   display: block;
   text-align: left;
+`;
+
+export const PopUpTopBlock = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 18px;
 `;
 
 export const PopUpTtl = styled.h3`
@@ -68,10 +93,41 @@ export const PopNewCardBtnClose = styled.p`
   }
 `;
 
+export const PopUpThemeTextUp = styled.p`
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 14px;
+  white-space: nowrap;
+`;
+
+export const PopUpThemeUp = styled.div`
+  display: block;
+  width: auto;
+  height: 30px;
+  padding: 8px 20px;
+  border-radius: 24px;
+  margin-right: 7px;
+  opacity: 0.4;
+  opacity: 1 !important;
+  background-color: ${({ $themeColor }) =>
+    themeStyles[$themeColor]?.backgroundColor || "#b4fdd1"};
+
+  ${PopUpThemeTextUp} {
+    color: ${({ $themeColor }) => themeStyles[$themeColor]?.color || "#06b16e"};
+  }
+
+  @media (max-width: ${breakpoints.md}px) {
+    display: none;
+  }
+`;
+
 export const PopUpWrap = styled.div`
   display: flex;
   align-items: flex-start;
   justify-content: space-between;
+  @media (max-width: ${breakpoints.lg}px) {
+    display: block;
+  }
 `;
 
 export const PopUpForm = styled.div`
