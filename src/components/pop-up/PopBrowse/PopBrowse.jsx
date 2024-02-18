@@ -28,10 +28,13 @@ import {
 import { useEffect, useState } from "react";
 import { useTasks } from "../../../hooks/useTasks.jsx";
 import { CalendarTtl, CalendarWrap } from "../../Calendar/Calendar.style.js";
+import { deleteTaskApi } from "../../../api.js";
+import { useUser } from "../../../hooks/useUser.jsx";
 
 function PopBrowse() {
   let { cardId } = useParams();
-  const { tasks } = useTasks();
+  const { tasks, getTasks } = useTasks();
+  const { isLoggedInUser } = useUser();
   const [task, setTask] = useState(null);
   const [themeColor, setThemeColor] = useState(null);
   const [isEditMode, setEditMode] = useState(false);
@@ -69,6 +72,20 @@ function PopBrowse() {
   }, [cardId, tasks]);
 
   if (task) {
+    const handleTaskDelete = async (e) => {
+      try {
+        e.preventDefault();
+        await deleteTaskApi({
+          token: isLoggedInUser.token,
+          idTask: task._id,
+        }).then((data) => {
+          getTasks(data.tasks);
+        });
+      } catch (error) {
+        console.log(error.message);
+      }
+    };
+
     return (
       <PopBrowseSt id="popBrowse">
         <PopUpContainer>
@@ -154,7 +171,7 @@ function PopBrowse() {
                     <ButtonAutoWidth onClick={toggleEditMode}>
                       Редактировать задачу
                     </ButtonAutoWidth>
-                    <ButtonAutoWidth>Удалить задачу</ButtonAutoWidth>
+                    <ButtonAutoWidth onClick={handleTaskDelete}>Удалить задачу</ButtonAutoWidth>
                   </div>
                   <Link to={AppRoutes.HOME}>
                     <ButtonAutoWidthBgFill className="_hover03">
@@ -166,8 +183,10 @@ function PopBrowse() {
                 <div className="pop-browse__btn-edit">
                   <div className="btn-group">
                     <ButtonAutoWidthBgFill>Сохранить</ButtonAutoWidthBgFill>
-                    <ButtonAutoWidth onClick={toggleEditMode}>Отменить</ButtonAutoWidth>
-                    <ButtonAutoWidth id="btnDelete">
+                    <ButtonAutoWidth onClick={toggleEditMode}>
+                      Отменить
+                    </ButtonAutoWidth>
+                    <ButtonAutoWidth id="btnDelete" onClick={handleTaskDelete}>
                       Удалить задачу
                     </ButtonAutoWidth>
                   </div>

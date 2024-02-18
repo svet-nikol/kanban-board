@@ -78,3 +78,19 @@ export async function addNewTaskApi({
   const updateTasks = await response.json();
   return updateTasks;
 }
+
+export async function deleteTaskApi({ token, idTask }) {
+  const response = await fetch(API_URL + `/${idTask}`, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+    method: "DELETE",
+  });
+
+  if (!response.ok) {
+    throw new Error("Ошибка сервера");
+  }
+
+  const updateTasks = await response.json();
+  return updateTasks;
+}
