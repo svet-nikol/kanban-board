@@ -13,6 +13,12 @@ import {
   PopUpThemeUp,
   PopUpThemeTextUp,
   PopUpTopBlock,
+  PopUpStatusBlock,
+  PopUpStatusTtl,
+  PopUpStatusThemes,
+  PopUpStatusThemeWrap,
+  PopUpStatusThemeText,
+  PopUpFormLabel,
 } from "../PopUp.styled";
 import Calendar from "../../Calendar/Calendar.jsx";
 import {
@@ -73,10 +79,10 @@ function PopBrowse() {
                   <PopUpThemeTextUp>{task.topic}</PopUpThemeTextUp>
                 </PopUpThemeUp>
               </PopUpTopBlock>
-              <div className="pop-browse__status status">
-                <p className="status__p subttl">Статус</p>
+              <PopUpStatusBlock>
+                <PopUpStatusTtl>Статус</PopUpStatusTtl>
                 {isEditMode ? (
-                  <div className="status__themes">
+                  <PopUpStatusThemes>
                     <div className="status__theme">
                       <p>Без статуса</p>
                     </div>
@@ -92,21 +98,21 @@ function PopBrowse() {
                     <div className="status__theme">
                       <p>Готово</p>
                     </div>
-                  </div>
+                  </PopUpStatusThemes>
                 ) : (
-                  <div className="status__themes">
-                    <div className="status__theme _gray">
-                      <p className="_gray">{task.status}</p>
-                    </div>
-                  </div>
+                  <PopUpStatusThemes>
+                    <PopUpStatusThemeWrap>
+                      <PopUpStatusThemeText>{task.status}</PopUpStatusThemeText>
+                    </PopUpStatusThemeWrap>
+                  </PopUpStatusThemes>
                 )}
-              </div>
+              </PopUpStatusBlock>
               <PopUpWrap>
                 <PopUpForm id="formBrowseCard" action="#">
                   <PopUpFormBlock>
-                    <label htmlFor="textArea01" className="subttl">
+                    <PopUpFormLabel htmlFor="textArea01">
                       Описание задачи
-                    </label>
+                    </PopUpFormLabel>
                     <PopUpFormTextarea
                       name="text"
                       id="textArea01"

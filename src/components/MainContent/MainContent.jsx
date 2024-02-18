@@ -2,14 +2,8 @@ import Column from "../Column/Column";
 import { Main, MainBlock, MainContentSt } from "./MainContent.styled.js";
 import { Container } from "../Common/Common.styled.js";
 import { useTasks } from "../../hooks/useTasks.jsx";
+import { statusList } from "../../lib/statusList.js";
 
-const statusList = [
-  "Без статуса",
-  "Нужно сделать",
-  "В работе",
-  "Тестирование",
-  "Готово",
-];
 
 function MainContent({ isLoaded }) {
   const { tasks } = useTasks();

@@ -1,6 +1,6 @@
 import styled, { css } from "styled-components";
 import { breakpoints } from "../../lib/breakpoints";
-import { themeStyles } from "../../lib/theme";
+import { themeStyles } from "../../lib/themes";
 
 export const PopNewCardSt = styled.div`
   display: block;
@@ -34,7 +34,7 @@ export const PopUpContainer = styled.div`
   @media (max-width: ${breakpoints.lg}px) {
     padding: 0;
     justify-content: flex-start;
-  };
+  }
   @media (max-width: ${breakpoints.md}px) {
     padding: 0;
     justify-content: flex-start;
@@ -93,6 +93,17 @@ export const PopNewCardBtnClose = styled.p`
   }
 `;
 
+const commonThemesForTopics = css`
+  display: block;
+  width: auto;
+  height: 30px;
+  padding: 8px 20px;
+  border-radius: 24px;
+  margin-right: 7px;
+  background-color: ${({ $themeColor }) =>
+    themeStyles[$themeColor]?.backgroundColor || "#b4fdd1"};
+`;
+
 export const PopUpThemeTextUp = styled.p`
   font-size: 14px;
   font-weight: 600;
@@ -101,24 +112,51 @@ export const PopUpThemeTextUp = styled.p`
 `;
 
 export const PopUpThemeUp = styled.div`
-  display: block;
-  width: auto;
-  height: 30px;
-  padding: 8px 20px;
-  border-radius: 24px;
-  margin-right: 7px;
   opacity: 0.4;
   opacity: 1 !important;
-  background-color: ${({ $themeColor }) =>
-    themeStyles[$themeColor]?.backgroundColor || "#b4fdd1"};
-
+  ${commonThemesForTopics}
   ${PopUpThemeTextUp} {
     color: ${({ $themeColor }) => themeStyles[$themeColor]?.color || "#06b16e"};
   }
-
   @media (max-width: ${breakpoints.md}px) {
     display: none;
   }
+`;
+
+export const PopUpStatusBlock = styled.div`
+  margin-bottom: 11px;
+`;
+
+export const PopUpStatusTtl = styled.p`
+  margin-bottom: 14px;
+  color: #000;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1;
+`;
+
+export const PopUpStatusThemes = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  justify-content: flex-start;
+`;
+
+export const PopUpStatusThemeWrap = styled.div`
+  border-radius: 24px;
+  border: 0.7px solid rgba(148, 166, 190, 0.4);
+  color: #94a6be;
+  padding: 11px 14px 10px;
+  margin-right: 7px;
+  margin-bottom: 7px;
+  ${themeStyles._gray}
+`;
+
+export const PopUpStatusThemeText = styled.p`
+  font-size: 14px;
+  line-height: 1;
+  letter-spacing: -0.14px;
+  ${themeStyles._gray}
 `;
 
 export const PopUpWrap = styled.div`
@@ -140,6 +178,13 @@ export const PopUpForm = styled.div`
 export const PopUpFormBlock = styled.form`
   display: flex;
   flex-direction: column;
+`;
+
+export const PopUpFormLabel = styled.label`
+  color: #000;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1;
 `;
 
 const commonInputTextarea = css`
@@ -185,6 +230,41 @@ export const PopUpFormInput = styled.input`
   ${commonInputTextarea}
 `;
 
+export const PopNewCardTopicsBlock = styled.div`
+  margin-bottom: 20px;
+`;
+
+export const PopNewCardTopicsTtl = styled.p`
+  margin-bottom: 14px;
+  color: #000;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1;
+`;
+export const PopNewCardTopicsBar = styled.div`
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: flex-start;
+  justify-content: flex-start;
+`;
+
+export const PopNewCardTopicLabel = styled.label`
+  ${commonThemesForTopics}
+  display: inline-block;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 14px;
+  white-space: nowrap;
+  color: ${({ $themeColor }) => themeStyles[$themeColor]?.color || "#06b16e"};
+  cursor: pointer;
+  opacity: 0.4;
+  &:hover {
+    opacity: 1;
+  }
+  input[type="radio"]:checked ~ & {
+    opacity: 1;
+  }
+`;
 export const PopExitSt = styled.div`
   display: block;
   width: 100%;

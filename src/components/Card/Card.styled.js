@@ -1,5 +1,5 @@
 import styled, { keyframes } from "styled-components";
-import { themeStyles } from "../../lib/theme.js";
+import { themeStyles } from "../../lib/themes.js";
 
 const CardItemAnimation = keyframes`
   0% {
