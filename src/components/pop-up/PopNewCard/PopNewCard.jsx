@@ -25,6 +25,7 @@ import { addNewTaskApi } from "../../../api.js";
 import { useUser } from "../../../hooks/useUser.jsx";
 import { useTasks } from "../../../hooks/useTasks.jsx";
 import { topicsWithColors } from "../../../lib/topics.js";
+import { CalendarTtl, CalendarWrap } from "../../Calendar/Calendar.style.js";
 
 function PopNewCard() {
   const { getTasks } = useTasks();
@@ -111,14 +112,13 @@ function PopNewCard() {
                       name="description"
                       id="textArea"
                       placeholder="Введите описание задачи..."
-                      // defaultValue={""}
                     />
                   </PopUpFormBlock>
                 </PopUpForm>
-                <div className="pop-new-card__calendar calendar">
-                  <p className="calendar__ttl subttl">Даты</p>
+                <CalendarWrap>
+                  <CalendarTtl>Даты</CalendarTtl>
                   <Calendar selected={selected} setSelected={setSelected} />
-                </div>
+                </CalendarWrap>
               </PopUpWrap>
               <PopNewCardTopicsBlock>
                 <PopNewCardTopicsTtl>Категория</PopNewCardTopicsTtl>

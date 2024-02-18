@@ -1,51 +1,93 @@
 .rdp {
-    --rdp-cell-size: 24px;
-    --rdp-caption-font-size: 14px;
-    --rdp-accent-color: #94A6BE;
-    /* --rdp-background-color: #e7edff; */
-    --rdp-accent-color-dark: #3003e1;
-    --rdp-background-color-dark: #180270;
-    --rdp-outline: 2px solid var(--rdp-accent-color);
-    --rdp-outline-selected: 3px solid var(--rdp-accent-color);
-    --rdp-selected-color: #fff;
-    margin: 0;
-    }
+  --rdp-cell-size: 24px;
+  --rdp-caption-font-size: 14px;
+  --rdp-accent-color: #94a6be;
+  /* --rdp-background-color: #e7edff; */
+  --rdp-accent-color-dark: #3003e1;
+  --rdp-background-color-dark: #180270;
+  --rdp-outline: 2px solid var(--rdp-accent-color);
+  --rdp-outline-selected: 3px solid var(--rdp-accent-color);
+  --rdp-selected-color: #fff;
+  margin: 0;
+  color: #94a6be;
+  /* font-family: Segoe UI, Roboto, Helvetica Neue, Arial, sans-serif, */
+  font-size: 10px;
+  font-weight: 500;
+  line-height: normal;
+  letter-spacing: -0.2px;
+  width: 167px;
+  height: fit-content;
+  /* selected: {
+      color: "#000000",
+    }, */
+}
 
 .rdp-table {
-    display: flex;
-    flex-direction: column;
-    flex-wrap: nowrap;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
 }
 
 .rdp-caption_label {
-    padding: 0px;
-    margin: 0.2em;
-    font-weight: 600;
-    text-transform: capitalize;
+  padding: 0px;
+  margin: 0.2em;
+  font-weight: 600;
+  text-transform: capitalize;
 }
 
 .rdp-table {
-    display: flex;
-    flex-direction: column;
-    flex-wrap: nowrap;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
 }
 .rdp-head {
-    margin: 0.5em;
+  margin: 0.5em;
 }
 
 .rdp-tfoot {
-    margin: 0.55em;
-    padding-top: 4px;
+  margin: 0.55em;
+  padding-top: 4px;
 }
 
 .rdp-head_row {
-    display: flex;
-    justify-content: space-between;
-    height: 12px;
+  display: flex;
+  justify-content: space-between;
+  height: 12px;
 }
 
 .rdp-head_cell {
-    font-size: 10px;
-    font-weight: 500;
-    text-transform: lowercase;
+  font-size: 10px;
+  font-weight: 500;
+  text-transform: lowercase;
+}
+
+@media (max-width: 660px) {
+  .rdp {
+    --rdp-cell-size: 50px;
+    font-size: 14px;
+    width: 100%;
+  }
+  .rdp-nav_button {
+    justify-content: flex-end;
+    width: 30px;
+    height: 30px;
+}
+  .rdp-head_row {
+    height: 24px;
+    gap: 35px;
+    padding-left: 7px;
+    justify-content: flex-start;
+  }
+  .rdp-head_cell {
+    font-size: 14px;
+  }
+  .rdp-head {
+    margin-bottom: 0;
+    margin-top: 1em;
+    margin-left: 10px;
+  }
+  .rdp-months {
+    display: flex;
+    justify-content: center;
+  }
 }

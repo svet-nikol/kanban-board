@@ -33,14 +33,10 @@ export default function Calendar({ selected, setSelected, taskDate }) {
   }
 
   const customStyles = {
-    color: "#94A6BE",
-    fontFamily: "'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif",
-    fontSize: "10px",
-    width: "167px",
-    height: "228px",
+    fontFamily: "Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif",
     selected: {
       color: "#000000",
-    },
+    }
   };
 
   return (
