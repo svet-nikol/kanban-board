@@ -39,15 +39,14 @@ function PopBrowse() {
   const { isLoggedInUser } = useUser();
   const [task, setTask] = useState(null);
   const [themeColor, setThemeColor] = useState(null);
-  const [isEditMode, setEditMode] = useState(false);
-  const [selected, setSelected] = useState(null); // для календаря
 
+  const [isEditMode, setEditMode] = useState(false); // для выбора режима редактирования формы
   const toggleEditMode = () => {
     setEditMode((prev) => !prev);
   };
+  const [isEditedTask, setIsEditedTask] = useState(null); // обновляемая задача
 
-
-  const [isEditedTask, setIsEditedTask] = useState(null);
+  const [selected, setSelected] = useState(null); // для календаря
   const [initialMonth, setInitialMonth] = useState(new Date());
   const [modifiers, setModifiers] = useState({});
 
@@ -56,20 +55,20 @@ function PopBrowse() {
     const foundTask = tasks.find((t) => t._id === cardId);
     if (foundTask) {
       setTask(foundTask);
-      setSelected(foundTask.date);
+
       const updateTaskForm = {
         status: foundTask.status,
         description: foundTask.description,
-        // data: foundTask.data
       };
       setIsEditedTask(updateTaskForm);
       
+      setSelected(foundTask.date);
       const newModifiers = {
         selected: new Date(foundTask.date),
       };
       setModifiers(newModifiers);
       setInitialMonth(new Date(foundTask.date));
-      
+
       let color;
       switch (foundTask.topic) {
         case "Web Design":
@@ -110,7 +109,6 @@ function PopBrowse() {
 
     const handleInputChange = (e) => {
       const { name, value } = e.target;
-      console.log({ [name]: value });   // удалить перед коммитом
       setIsEditedTask({ ...isEditedTask, [name]: value });
     };
 
@@ -130,12 +128,10 @@ function PopBrowse() {
       }).then((data) => {
         getTasks(data.tasks);
       });
-      
     } catch (error) {
       console.log(error.message);
     }
   };
-
 
     return (
       <PopBrowseSt id="popBrowse">
@@ -207,8 +203,9 @@ function PopBrowse() {
                     selected={selected}
                     setSelected={setSelected}
                     initialMonth={initialMonth}
+                    setInitialMonth={setInitialMonth}
                     modifiers={modifiers}
-                    // taskDate={!isEditMode ? task.date : isEditedTask.date}
+                    setModifiers={setModifiers}
                   />
                 </CalendarWrap>
               </PopUpWrap>

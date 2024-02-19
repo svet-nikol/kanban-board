@@ -29,9 +29,12 @@ import { CalendarTtl, CalendarWrap } from "../../Calendar/Calendar.style.js";
 
 function PopNewCard() {
   const { getTasks } = useTasks();
+  const { isLoggedInUser } = useUser();
 
   const [selected, setSelected] = useState(null);
-  const { isLoggedInUser } = useUser();
+  const [initialMonth, setInitialMonth] = useState(new Date());
+  const [modifiers, setModifiers] = useState({});
+
 
   const newTaskForm = {
     title: "",
@@ -42,7 +45,6 @@ function PopNewCard() {
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
-    console.log({ [name]: value });   // удалить перед коммитом
     setNewTask({ ...newTask, [name]: value });
   };
 
@@ -117,7 +119,13 @@ function PopNewCard() {
                 </PopUpForm>
                 <CalendarWrap>
                   <CalendarTtl>Даты</CalendarTtl>
-                  <Calendar selected={selected} setSelected={setSelected} />
+                  <Calendar                     
+                    selected={selected}
+                    setSelected={setSelected}
+                    initialMonth={initialMonth}
+                    setInitialMonth={setInitialMonth}
+                    modifiers={modifiers}
+                    setModifiers={setModifiers} />
                 </CalendarWrap>
               </PopUpWrap>
               <PopNewCardTopicsBlock>

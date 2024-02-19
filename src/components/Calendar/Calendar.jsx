@@ -3,21 +3,9 @@ import { DayPicker } from "react-day-picker";
 import "react-day-picker/dist/style.css";
 import "./day-picker.css";
 import { ru } from "date-fns/locale";
-// import { useEffect, useState } from "react";
 
-export default function Calendar({ selected, setSelected, initialMonth, modifiers }) {
-  // const [initialMonth, setInitialMonth] = useState(new Date());
-  // const [modifiers, setModifiers] = useState({});
 
-  // useEffect(() => {
-  //   if (taskDate) {
-  //     const newModifiers = {
-  //       selected: new Date(taskDate),
-  //     };
-  //     setModifiers(newModifiers);
-  //     setInitialMonth(new Date(taskDate));
-  //   }
-  // }, [taskDate]);
+export default function Calendar({ selected, setSelected, initialMonth, setInitialMonth, modifiers, setModifiers }) {
 
   let footer = <p>Выберите срок исполнения.</p>;
   if (selected) {
@@ -32,6 +20,14 @@ export default function Calendar({ selected, setSelected, initialMonth, modifier
     );
   }
 
+  const handleMonthChange = (date) => {
+    setInitialMonth(date);
+  };
+
+  const handleDayChange = (selectedDate) => {
+    setModifiers(selectedDate);
+  };
+
   const customStyles = {
     fontFamily: "Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif",
     selected: {
@@ -44,12 +40,13 @@ export default function Calendar({ selected, setSelected, initialMonth, modifier
       mode="single"
       selected={selected}
       onSelect={setSelected}
+      onMonthChange={handleMonthChange}
       footer={footer}
       locale={ru}
       style={customStyles}
       month={initialMonth}
       modifiers={modifiers}
-      onDayClick={setSelected}
+      onDayClick={handleDayChange}
     />
   );
 }
