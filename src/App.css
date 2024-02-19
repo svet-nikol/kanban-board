@@ -691,7 +691,7 @@ body {
   align-items: flex-start;
   justify-content: flex-start;
 } */
-.status__theme {
+/* .status__theme {
   border-radius: 24px;
   border: 0.7px solid rgba(148, 166, 190, 0.4);
   color: #94a6be;
@@ -703,7 +703,7 @@ body {
   font-size: 14px;
   line-height: 1;
   letter-spacing: -0.14px;
-}
+} */
 
 ._btn-bor {
   border-radius: 4px;

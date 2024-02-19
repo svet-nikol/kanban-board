@@ -19,6 +19,7 @@ import {
   PopUpStatusThemeWrap,
   PopUpStatusThemeText,
   PopUpFormLabel,
+  PopUpStatusLabel,
 } from "../PopUp.styled";
 import Calendar from "../../Calendar/Calendar.jsx";
 import {
@@ -30,6 +31,7 @@ import { useTasks } from "../../../hooks/useTasks.jsx";
 import { CalendarTtl, CalendarWrap } from "../../Calendar/Calendar.style.js";
 import { deleteTaskApi } from "../../../api.js";
 import { useUser } from "../../../hooks/useUser.jsx";
+import { statusList } from "../../../lib/statusList.js";
 
 function PopBrowse() {
   let { cardId } = useParams();
@@ -101,21 +103,24 @@ function PopBrowse() {
                 <PopUpStatusTtl>Статус</PopUpStatusTtl>
                 {isEditMode ? (
                   <PopUpStatusThemes>
-                    <div className="status__theme">
-                      <p>Без статуса</p>
-                    </div>
-                    <div className="status__theme">
-                      <p className="_gray">{task.status}</p>
-                    </div>
-                    <div className="status__theme">
-                      <p>В работе</p>
-                    </div>
-                    <div className="status__theme">
-                      <p>Тестирование</p>
-                    </div>
-                    <div className="status__theme">
-                      <p>Готово</p>
-                    </div>
+                    {statusList.map((item, index) => (
+                      <div key={item}>
+                        <input
+                          type="radio"
+                          id={`radio${index}`}
+                          name="topic"
+                          value={item}
+                          checked={item === task.status}
+                          // onChange={handleInputChange}
+                          style={{ display: "none" }}
+                        />
+                        <PopUpStatusLabel
+                          htmlFor={`radio${index}`}
+                        >
+                          {item}
+                        </PopUpStatusLabel>
+                      </div>
+                    ))}
                   </PopUpStatusThemes>
                 ) : (
                   <PopUpStatusThemes>
@@ -171,7 +176,9 @@ function PopBrowse() {
                     <ButtonAutoWidth onClick={toggleEditMode}>
                       Редактировать задачу
                     </ButtonAutoWidth>
-                    <ButtonAutoWidth onClick={handleTaskDelete}>Удалить задачу</ButtonAutoWidth>
+                    <ButtonAutoWidth onClick={handleTaskDelete}>
+                      Удалить задачу
+                    </ButtonAutoWidth>
                   </div>
                   <Link to={AppRoutes.HOME}>
                     <ButtonAutoWidthBgFill className="_hover03">

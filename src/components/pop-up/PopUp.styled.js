@@ -159,6 +159,25 @@ export const PopUpStatusThemeText = styled.p`
   ${themeStyles._gray}
 `;
 
+export const PopUpStatusLabel = styled.label`
+  display: inline-block;
+  border-radius: 24px;
+  border: 0.7px solid rgba(148, 166, 190, 0.4);
+  color: #94a6be;
+  padding: 11px 14px 10px;
+  margin-right: 7px;
+  margin-bottom: 7px;
+  font-size: 14px;
+  line-height: 1;
+  letter-spacing: -0.14px;
+  cursor: pointer;
+  input[type="radio"]:checked ~ & {
+    ${themeStyles._gray}
+  }
+  &:hover {
+  background-color: #EAEEF6}
+`;
+
 export const PopUpWrap = styled.div`
   display: flex;
   align-items: flex-start;
@@ -197,6 +216,7 @@ const commonInputTextarea = css`
   font-size: 14px;
   line-height: 1;
   letter-spacing: -0.14px;
+  font-family: "Roboto";
 
   &::-moz-placeholder {
     font-weight: 400;
