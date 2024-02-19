@@ -123,6 +123,23 @@ export const PopUpThemeUp = styled.div`
   }
 `;
 
+export const PopUpThemeDown = styled(PopUpThemeUp)`
+  display: none;
+  @media (max-width: ${breakpoints.md}px) {
+    ${commonThemesForTopics}
+  }
+`;
+
+export const PopUpDownBlock = styled.div`
+  display: none;
+  margin-bottom: 20px;
+  @media (max-width: ${breakpoints.md}px) {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+`;
+
 export const PopUpStatusBlock = styled.div`
   margin-bottom: 11px;
 `;
@@ -175,7 +192,8 @@ export const PopUpStatusLabel = styled.label`
     ${themeStyles._gray}
   }
   &:hover {
-  background-color: #EAEEF6}
+    background-color: #eaeef6;
+  }
 `;
 
 export const PopUpWrap = styled.div`
@@ -236,6 +254,9 @@ const commonInputTextarea = css`
     font-family: "Roboto";
     padding-top: 14px;
   }
+  /* @media (max-width: ${breakpoints.lg}px) {
+    max-width: 100%;
+  } */
 `;
 
 export const PopUpFormTextarea = styled.textarea`
@@ -243,6 +264,9 @@ export const PopUpFormTextarea = styled.textarea`
   margin-top: 14px;
   height: 200px;
   ${commonInputTextarea}
+  /* @media (max-width: ${breakpoints.lg}px) {
+    height: 37px;
+  } */
 `;
 
 export const PopUpFormInput = styled.input`

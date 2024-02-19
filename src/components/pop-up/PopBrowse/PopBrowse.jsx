@@ -1,4 +1,4 @@
-import { Link, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { AppRoutes } from "../../../lib/approutes";
 import {
   PopBrowseSt,
@@ -20,11 +20,15 @@ import {
   PopUpStatusThemeText,
   PopUpFormLabel,
   PopUpStatusLabel,
+  PopNewCardTopicsTtl,
+  PopUpThemeDown,
+  PopUpDownBlock,
 } from "../PopUp.styled";
 import Calendar from "../../Calendar/Calendar.jsx";
 import {
   ButtonAutoWidth,
   ButtonAutoWidthBgFill,
+  LinkButtonBgFillAutoW,
 } from "../../Buttons/Buttons.styled.js";
 import { useEffect, useState } from "react";
 import { useTasks } from "../../../hooks/useTasks.jsx";
@@ -209,15 +213,14 @@ function PopBrowse() {
                   />
                 </CalendarWrap>
               </PopUpWrap>
-              <div
-                className="theme-down__categories theme-down"
-                style={{ display: "none" }}
-              >
-                <p className="categories__p subttl">Категория</p>
-                <div className="categories__theme _orange _active-category">
-                  <p className="_orange">Web Design</p>
-                </div>
-              </div>
+
+              <PopUpDownBlock>
+                <PopNewCardTopicsTtl>Категория</PopNewCardTopicsTtl>
+                <PopUpThemeDown $themeColor={themeColor}>
+                  <PopUpThemeTextUp>{task.topic}</PopUpThemeTextUp>
+                </PopUpThemeDown>
+                
+              </PopUpDownBlock>
               {!isEditMode ? (
                 <div className="pop-browse__btn-browse ">
                   <div className="btn-group">
@@ -228,11 +231,7 @@ function PopBrowse() {
                       Удалить задачу
                     </ButtonAutoWidth>
                   </div>
-                  <Link to={AppRoutes.HOME}>
-                    <ButtonAutoWidthBgFill className="_hover03">
-                      Закрыть
-                    </ButtonAutoWidthBgFill>
-                  </Link>
+                  <LinkButtonBgFillAutoW to={AppRoutes.HOME}>Закрыть</LinkButtonBgFillAutoW>
                 </div>
               ) : (
                 <div className="pop-browse__btn-edit">
@@ -241,13 +240,11 @@ function PopBrowse() {
                     <ButtonAutoWidth onClick={toggleEditMode}>
                       Отменить
                     </ButtonAutoWidth>
-                    <ButtonAutoWidth id="btnDelete" onClick={handleTaskDelete}>
+                    <ButtonAutoWidth onClick={handleTaskDelete}>
                       Удалить задачу
                     </ButtonAutoWidth>
                   </div>
-                  <Link to={AppRoutes.HOME}>
-                    <ButtonAutoWidthBgFill>Закрыть</ButtonAutoWidthBgFill>
-                  </Link>
+                  <LinkButtonBgFillAutoW to={AppRoutes.HOME}>Закрыть</LinkButtonBgFillAutoW>
                 </div>
               )}
             </PopUpContent>
