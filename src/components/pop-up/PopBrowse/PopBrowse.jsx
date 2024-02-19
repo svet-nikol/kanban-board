@@ -29,7 +29,7 @@ import {
 import { useEffect, useState } from "react";
 import { useTasks } from "../../../hooks/useTasks.jsx";
 import { CalendarTtl, CalendarWrap } from "../../Calendar/Calendar.style.js";
-import { deleteTaskApi } from "../../../api.js";
+import { deleteTaskApi, editTaskApi } from "../../../api.js";
 import { useUser } from "../../../hooks/useUser.jsx";
 import { statusList } from "../../../lib/statusList.js";
 
@@ -46,11 +46,30 @@ function PopBrowse() {
     setEditMode((prev) => !prev);
   };
 
+
+  const [isEditedTask, setIsEditedTask] = useState(null);
+  const [initialMonth, setInitialMonth] = useState(new Date());
+  const [modifiers, setModifiers] = useState({});
+
+
   useEffect(() => {
     const foundTask = tasks.find((t) => t._id === cardId);
     if (foundTask) {
       setTask(foundTask);
       setSelected(foundTask.date);
+      const updateTaskForm = {
+        status: foundTask.status,
+        description: foundTask.description,
+        // data: foundTask.data
+      };
+      setIsEditedTask(updateTaskForm);
+      
+      const newModifiers = {
+        selected: new Date(foundTask.date),
+      };
+      setModifiers(newModifiers);
+      setInitialMonth(new Date(foundTask.date));
+      
       let color;
       switch (foundTask.topic) {
         case "Web Design":
@@ -88,6 +107,36 @@ function PopBrowse() {
       }
     };
 
+
+    const handleInputChange = (e) => {
+      const { name, value } = e.target;
+      console.log({ [name]: value });   // удалить перед коммитом
+      setIsEditedTask({ ...isEditedTask, [name]: value });
+    };
+
+    const handleTaskUpdate = async (e) => {
+      let updatedCard = {
+      ...isEditedTask, data: selected}
+    try {
+      e.preventDefault();
+      await editTaskApi({
+        token: isLoggedInUser.token,
+        idTask: task._id,
+        title: task.title,
+        topic: task.topic,
+        status: updatedCard.status,
+        description: updatedCard.description,
+        date: updatedCard.data,
+      }).then((data) => {
+        getTasks(data.tasks);
+      });
+      
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
+
+
     return (
       <PopBrowseSt id="popBrowse">
         <PopUpContainer>
@@ -108,10 +157,10 @@ function PopBrowse() {
                         <input
                           type="radio"
                           id={`radio${index}`}
-                          name="topic"
+                          name="status"
                           value={item}
-                          checked={item === task.status}
-                          // onChange={handleInputChange}
+                          checked={item === isEditedTask.status}
+                          onChange={handleInputChange}
                           style={{ display: "none" }}
                         />
                         <PopUpStatusLabel
@@ -137,12 +186,12 @@ function PopBrowse() {
                       Описание задачи
                     </PopUpFormLabel>
                     <PopUpFormTextarea
-                      name="text"
+                      name="description"
                       id="textArea01"
-                      readOnly=""
                       placeholder="Введите описание задачи..."
-                      value={task.description}
+                      value={!isEditMode ? task.description : isEditedTask.description}
                       disabled={!isEditMode}
+                      onChange={handleInputChange}
                       style={{
                         color: !isEditMode ? "rgb(148, 166, 190)" : "",
                         backgroundColor: !isEditMode
@@ -157,7 +206,9 @@ function PopBrowse() {
                   <Calendar
                     selected={selected}
                     setSelected={setSelected}
-                    taskDate={task.date}
+                    initialMonth={initialMonth}
+                    modifiers={modifiers}
+                    // taskDate={!isEditMode ? task.date : isEditedTask.date}
                   />
                 </CalendarWrap>
               </PopUpWrap>
@@ -189,7 +240,7 @@ function PopBrowse() {
               ) : (
                 <div className="pop-browse__btn-edit">
                   <div className="btn-group">
-                    <ButtonAutoWidthBgFill>Сохранить</ButtonAutoWidthBgFill>
+                    <ButtonAutoWidthBgFill onClick={handleTaskUpdate}>Сохранить</ButtonAutoWidthBgFill>
                     <ButtonAutoWidth onClick={toggleEditMode}>
                       Отменить
                     </ButtonAutoWidth>

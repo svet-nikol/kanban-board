@@ -42,7 +42,7 @@ function PopNewCard() {
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
-    console.log({ [name]: value });
+    console.log({ [name]: value });   // удалить перед коммитом
     setNewTask({ ...newTask, [name]: value });
   };
 

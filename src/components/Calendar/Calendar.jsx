@@ -3,21 +3,21 @@ import { DayPicker } from "react-day-picker";
 import "react-day-picker/dist/style.css";
 import "./day-picker.css";
 import { ru } from "date-fns/locale";
-import { useEffect, useState } from "react";
+// import { useEffect, useState } from "react";
 
-export default function Calendar({ selected, setSelected, taskDate }) {
-  const [initialMonth, setInitialMonth] = useState(new Date());
-  const [modifiers, setModifiers] = useState({});
+export default function Calendar({ selected, setSelected, initialMonth, modifiers }) {
+  // const [initialMonth, setInitialMonth] = useState(new Date());
+  // const [modifiers, setModifiers] = useState({});
 
-  useEffect(() => {
-    if (taskDate) {
-      const newModifiers = {
-        selected: new Date(taskDate),
-      };
-      setModifiers(newModifiers);
-      setInitialMonth(new Date(taskDate));
-    }
-  }, [taskDate]);
+  // useEffect(() => {
+  //   if (taskDate) {
+  //     const newModifiers = {
+  //       selected: new Date(taskDate),
+  //     };
+  //     setModifiers(newModifiers);
+  //     setInitialMonth(new Date(taskDate));
+  //   }
+  // }, [taskDate]);
 
   let footer = <p>Выберите срок исполнения.</p>;
   if (selected) {

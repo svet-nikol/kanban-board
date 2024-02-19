@@ -94,3 +94,34 @@ export async function deleteTaskApi({ token, idTask }) {
   const updateTasks = await response.json();
   return updateTasks;
 }
+
+export async function editTaskApi({
+  token,
+  idTask,
+  title,
+  topic,
+  status,
+  description,
+  date,
+}) {
+  const response = await fetch(API_URL + `/${idTask}`, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+    method: "PUT",
+    body: JSON.stringify({
+      title,
+      topic,
+      status,
+      description,
+      date,
+    }),
+  });
+
+  if (!response.ok) {
+    throw new Error("Ошибка сервера");
+  }
+
+  const updateTasks = await response.json();
+  return updateTasks;
+}
