@@ -1,37 +1,36 @@
-import { Link } from "react-router-dom";
 import { AppRoutes } from "../../../lib/approutes";
 import { useUser } from "../../../hooks/useUser";
+import { PopExitBlock, PopExitContainer, PopExitFormGroup, PopExitSt, PopExitTtl } from "../PopUp.styled";
+import { LinkButtonBgFill_153, LinkButtonTransparent_153 } from "../../Buttons/Buttons.styled";
 
 function PopExit() {
   const { logoutUser } = useUser();
   return (
-    <div className="pop-exit" id="popExit">
-      <div className="pop-exit__container">
-        <div className="pop-exit__block">
-          <div className="pop-exit__ttl">
-            <h2>Выйти из аккаунта?</h2>
-          </div>
+    <PopExitSt id="popExit">
+      <PopExitContainer>
+        <PopExitBlock>
+          <PopExitTtl>Выйти из аккаунта?</PopExitTtl>
           <form className="pop-exit__form" id="formExit" action="#">
-            <div className="pop-exit__form-group">
-              <Link
-                className="pop-exit__exit-yes _hover01"
+            <PopExitFormGroup>
+              <LinkButtonBgFill_153
+                className="_hover01"
                 id="exitYes"
                 onClick={logoutUser}
               >
                 Да, выйти
-              </Link>
-              <Link
-                className="pop-exit__exit-no _hover03"
+              </LinkButtonBgFill_153>
+              <LinkButtonTransparent_153
+                className="_hover03"
                 id="exitNo"
                 to={AppRoutes.HOME}
               >
                 Нет, остаться
-              </Link>
-            </div>
+              </LinkButtonTransparent_153>
+            </PopExitFormGroup>
           </form>
-        </div>
-      </div>
-    </div>
+        </PopExitBlock>
+      </PopExitContainer>
+    </PopExitSt>
   );
 }
 

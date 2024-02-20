@@ -14,6 +14,7 @@ import {
   DeadlineDate,
 } from "./Card.styled.js";
 import { AppRoutes } from "../../lib/approutes.js";
+import { format } from "date-fns";
 
 function Card({ theme, name, deadline, id }) {
   let color;
@@ -39,13 +40,11 @@ function Card({ theme, name, deadline, id }) {
             <CardThemeText>{theme}</CardThemeText>
           </CardTheme>
           <Link to={`${AppRoutes.CARD}/${id}`}>
-          {/* <a href="#popBrowse" target="_self"> */}
             <CardBtn>
               <CardBtnInnerPoint />
               <CardBtnInnerPoint />
               <CardBtnInnerPoint />
             </CardBtn>
-          {/* </a> */}
           </Link>
         </CardGroup>
         <CardContent>
@@ -81,7 +80,7 @@ function Card({ theme, name, deadline, id }) {
                 </clipPath>
               </defs>
             </DeadlineIcon>
-            <DeadlineDate>{deadline}</DeadlineDate>
+            <DeadlineDate>{format(deadline, "dd.MM.yy")}</DeadlineDate>
           </DeadlineBlock>
         </CardContent>
       </CardWrapper>

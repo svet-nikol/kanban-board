@@ -1,52 +1,52 @@
-// import React, { useState } from "react";
-// import { useState } from "react";
 import { format } from "date-fns";
 import { DayPicker } from "react-day-picker";
 import "react-day-picker/dist/style.css";
+import "./day-picker.css";
 import { ru } from "date-fns/locale";
 
-export default function Calendar({selected, setSelected}) {
-  // const [selected, setSelected] = React.useState(null);
-  // const [selected, setSelected] = useState(null);
 
-  const customFormatMonthsDays = {
-    ...ru,
-    // localize: {
-    //   month: (index, format) => {
-    //     return format(
-    //       [
-    //         "Январь",
-    //         "Февраль",
-    //         "Март",
-    //         "Апрель",
-    //         "Май",
-    //         "Июнь",
-    //         "Июль",
-    //         "Август",
-    //         "Сентябрь",
-    //         "Октябрь",
-    //         "Ноябрь",
-    //         "Декабрь",
-    //       ][index]
-    //     );
-    //   },
-    //   weekday: (index, format) => {
-    //     return format(["пн", "вт", "ср", "чт", "пт", "сб", "вс"][index]);
-    //   },
-    // },
-  };
+export default function Calendar({ selected, setSelected, initialMonth, setInitialMonth, modifiers, setModifiers }) {
 
   let footer = <p>Выберите срок исполнения.</p>;
   if (selected) {
-    footer = <p>Срок исполнения: {format(selected, "dd.MM.yyyy")}.</p>;
+    footer = (
+      <p>
+        Срок исполнения:{" "}
+        <span style={{ color: "#000000" }}>
+          {format(selected, "dd.MM.yyyy")}
+        </span>
+        .
+      </p>
+    );
   }
+
+  const handleMonthChange = (date) => {
+    setInitialMonth(date);
+  };
+
+  const handleDayChange = (selectedDate) => {
+    setModifiers(selectedDate);
+  };
+
+  const customStyles = {
+    fontFamily: "Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif",
+    selected: {
+      color: "#000000",
+    }
+  };
+
   return (
     <DayPicker
       mode="single"
       selected={selected}
       onSelect={setSelected}
+      onMonthChange={handleMonthChange}
       footer={footer}
-      locale={customFormatMonthsDays}
+      locale={ru}
+      style={customStyles}
+      month={initialMonth}
+      modifiers={modifiers}
+      onDayClick={handleDayChange}
     />
   );
 }
